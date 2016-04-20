@@ -7,7 +7,8 @@ def run(job,tempdir):
     ID = list()
     with open(job) as F:
         for line in F:
-            ID.append(line.strip())
+            if 'pando' in line:
+                ID.append(line.strip())
     boolean = True
     print "Checking jobs..."
     while boolean:
