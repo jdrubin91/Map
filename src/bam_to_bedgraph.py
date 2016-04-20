@@ -20,6 +20,4 @@ def run(scriptdir, fullpath, tempdir):
     outfile.write("done")
     outfile.close()
     
-    os.system("bash " + scriptdir + "/runbam_to_5primebed.sh > " + tempdir + "/Job_ID.txt")
-    
-    return tempdir + "/Job_ID.txt"
+    os.system("bash " + scriptdir + "/runbam_to_5primebed.sh")

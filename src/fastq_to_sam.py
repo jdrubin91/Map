@@ -18,6 +18,4 @@ def run(scriptdir, fullpath, tempdir):
     outfile.write("done")
     outfile.close()
     
-    os.system("bash " + scriptdir + "/runbowtiedir.sh > " + tempdir + "/Job_ID.txt")
-    
-    return tempdir + "/Job_ID.txt"
+    os.system("bash " + scriptdir + "/runbowtiedir.sh")

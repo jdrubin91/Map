@@ -16,6 +16,17 @@ import readcount_correction
 import igv_create
 import millions_mapped
 
+
+#User-defined input
+#======================================================================
+#Give full path to SRA files (remember to include a '/' at the end)
+fullpath = '/scratch/Users/joru1876/test/'
+
+#Give user ID
+user = 'joru1876'
+#======================================================================
+
+
 #Return parent directory
 def parent_dir(directory):
     pathlist = directory.split('/')
@@ -32,8 +43,6 @@ scriptdir = parent_dir(homedir) + '/scripts'
 #Temporary files directory
 tempdir = parent_dir(homedir) + '/temp'
 
-#Give full path to SRA files (remember to include a '/' at the end)
-fullpath = '/scratch/Users/joru1876/test/'
 
 def run():
     print "SRA filepath: ", fullpath
@@ -41,20 +50,20 @@ def run():
     #job = sra_to_fastq.run(scriptdir, fullpath, tempdir)
     #check_job.run(job,tempdir)
     print "done\nChecking quality..."
-    job = quality_check.run(scriptdir, fullpath, tempdir)
-    check_job.run(job,tempdir)
+    quality_check.run(scriptdir, fullpath, tempdir)
+    check_job.run(tempdir,user)
     print "done\nFlipping Reads..."
-    job = flip_reads.run(scriptdir, fullpath, tempdir)
-    check_job.run(job,tempdir)
+    flip_reads.run(scriptdir, fullpath, tempdir)
+    check_job.run(tempdir,user)
     print "done\nConverting Fastq to SAM..."
-    job = fastq_to_sam.run(scriptdir, fullpath, tempdir)
-    check_job.run(job,tempdir)
+    fastq_to_sam.run(scriptdir, fullpath, tempdir)
+    check_job.run(tempdir,user)
     print "done\nConverting SAM to BAM..."
-    job = sam_to_bam.run(scriptdir, fullpath, tempdir)
-    check_job.run(job,tempdir)
+    sam_to_bam.run(scriptdir, fullpath, tempdir)
+    check_job.run(tempdir,user)
     print "done\nConverting BAM to Bedgraph..."
-    job = bam_to_bedgraph.run(scriptdir, fullpath, tempdir)
-    check_job.run(job,tempdir)
+    bam_to_bedgraph.run(scriptdir, fullpath, tempdir)
+    check_job.run(tempdir,user)
     print "done\nCorrecting for readcounts..."
     readcount_correction.run(scriptdir, fullpath)
     print "done\nCreating IGV files..."
