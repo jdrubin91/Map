@@ -21,9 +21,6 @@ import millions_mapped
 #======================================================================
 #Give full path to SRA files (remember to include a '/' at the end)
 fullpath = '/scratch/Users/joru1876/test/'
-
-#Give user ID
-user = 'joru1876'
 #======================================================================
 
 
@@ -50,8 +47,8 @@ def run():
     #job = sra_to_fastq.run(scriptdir, fullpath, tempdir)
     #check_job.run(job,tempdir)
     print "done\nChecking quality..."
-    quality_check.run(scriptdir, fullpath, tempdir)
-    #check_job.run(tempdir,user)
+    job = quality_check.run(scriptdir, fullpath, tempdir)
+    check_job.run(job,tempdir)
     #print "done\nFlipping Reads..."
     #flip_reads.run(scriptdir, fullpath, tempdir)
     #check_job.run(tempdir,user)
