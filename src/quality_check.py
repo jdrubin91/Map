@@ -11,4 +11,4 @@ def run(scriptdir, fullpath, tempdir):
     outfile.write("done")
     outfile.close()
     
-    os.system("bash " + scriptdir + "/runqual.sh")
+    os.system("bash " + scriptdir + "/runqual.sh > " + tempdir + "/Job_ID.txt")

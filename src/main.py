@@ -51,26 +51,26 @@ def run():
     #check_job.run(job,tempdir)
     print "done\nChecking quality..."
     quality_check.run(scriptdir, fullpath, tempdir)
-    check_job.run(tempdir,user)
-    print "done\nFlipping Reads..."
-    flip_reads.run(scriptdir, fullpath, tempdir)
-    check_job.run(tempdir,user)
-    print "done\nConverting Fastq to SAM..."
-    fastq_to_sam.run(scriptdir, fullpath, tempdir)
-    check_job.run(tempdir,user)
-    print "done\nConverting SAM to BAM..."
-    sam_to_bam.run(scriptdir, fullpath, tempdir)
-    check_job.run(tempdir,user)
-    print "done\nConverting BAM to Bedgraph..."
-    bam_to_bedgraph.run(scriptdir, fullpath, tempdir)
-    check_job.run(tempdir,user)
-    print "done\nCorrecting for readcounts..."
-    readcount_correction.run(scriptdir, fullpath)
-    print "done\nCreating IGV files..."
-    igv_create.run(scriptdir, fullpath)
-    print "done\nGetting millions mapped reads..."
-    millions_mapped.run(scriptdir, fullpath)
-    print "done"
+    #check_job.run(tempdir,user)
+    #print "done\nFlipping Reads..."
+    #flip_reads.run(scriptdir, fullpath, tempdir)
+    #check_job.run(tempdir,user)
+    #print "done\nConverting Fastq to SAM..."
+    #fastq_to_sam.run(scriptdir, fullpath, tempdir)
+    #check_job.run(tempdir,user)
+    #print "done\nConverting SAM to BAM..."
+    #sam_to_bam.run(scriptdir, fullpath, tempdir)
+    #check_job.run(tempdir,user)
+    #print "done\nConverting BAM to Bedgraph..."
+    #bam_to_bedgraph.run(scriptdir, fullpath, tempdir)
+    #check_job.run(tempdir,user)
+    #print "done\nCorrecting for readcounts..."
+    #readcount_correction.run(scriptdir, fullpath)
+    #print "done\nCreating IGV files..."
+    #igv_create.run(scriptdir, fullpath)
+    #print "done\nGetting millions mapped reads..."
+    #millions_mapped.run(scriptdir, fullpath)
+    #print "done"
     
     
     
