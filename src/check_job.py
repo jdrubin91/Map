@@ -23,5 +23,4 @@ def run(job,tempdir):
                     i += 1
                 status.append(i)
         os.system("rm " + tempdir + "/" + statusfile)
-        print status
         boolean = sum(status) > 0

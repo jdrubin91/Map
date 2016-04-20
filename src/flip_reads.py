@@ -8,7 +8,7 @@ def run(scriptdir, fullpath, tempdir):
     outfile.write("indir=" + fullpath + "\n")
     outfile.write("mkdir -p $od\n")
     outfile.write("for pathandfilename in `ls $indir*.fastq`; do\n")
-    outfile.wrtie("entry=`basename $pathandfilename .fastq`\n")
+    outfile.write("entry=`basename $pathandfilename .fastq`\n")
     outfile.write("echo $entry\n")
     outfile.write("ofile=${entry}.flip.fastq\n")
     outfile.write("echo $ofile\n")
