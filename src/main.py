@@ -33,13 +33,13 @@ scriptdir = parent_dir(homedir) + '/scripts'
 tempdir = parent_dir(homedir) + '/temp'
 
 #Give full path to SRA files (remember to include a '/' at the end)
-fullpath = ''
+fullpath = '/scratch/Users/joru1876/test/'
 
 def run():
     print "SRA filepath: ", fullpath
-    print "Converting SRA to Fastq..."
-    job = sra_to_fastq.run(scriptdir, fullpath, tempdir)
-    check_job.run(job,tempdir)
+    #print "Converting SRA to Fastq..."
+    #job = sra_to_fastq.run(scriptdir, fullpath, tempdir)
+    #check_job.run(job,tempdir)
     print "done\nChecking quality..."
     job = quality_check.run(scriptdir, fullpath, tempdir)
     check_job.run(job,tempdir)
