@@ -22,5 +22,5 @@ def run(job,tempdir):
                 for line in F:
                     i += 1
                 status.append(i)
-        os.system("rm " + tempdir + "/" + statusfile)
+            os.system("rm " + tempdir + "/" + statusfile)
         boolean = sum(status) > 0
