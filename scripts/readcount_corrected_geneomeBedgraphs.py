@@ -282,7 +282,7 @@ def main4(directory_of_sortedbams):
                 	f.close()
 
 
-def main5_modifiedforthingsthatendwith15(directory_of_sortedbams):
+def main7(directory_of_sortedbams):
 	#/projects/Down/Downseq/GROseq/gro100814/bowtie2/sortedbam/genomecoveragebed/fortdf
         dic_mapped = {}
         list_num = []
@@ -359,17 +359,15 @@ def main5(directory_of_sortedbams):
                 dic_mapped[bamfileroot] = mapped_reads
                 list_num.append(mapped_reads)
 		f.close()
-	print dic_mapped
         max_num = max(list_num)
 	bedgraphouts = [filename for filename in glob.glob(os.path.join(outdir, '*.mp.BedGraph'))]
         for bamfile in glob.glob(os.path.join(directory_of_sortedbams, '*.sorted.bam')):
                 bamfileroot = bamfile.split("/")[-1]
 		bamfileroot = bamfileroot.split(".sorted")[0]
 #		GRO177_100814.fastqbowtie2.BedGraph
-		#bedgraph = outdir+bamfileroot+".sorted.BedGraph"
 		bedgraph = outdir+bamfileroot+".BedGraph"
 		print bedgraph
-		total_reads = dic_mapped[bamfileroot]
+                total_reads = dic_mapped[bamfileroot]
 		print total_reads
                 bedgraphout = bedgraph+".mp.BedGraph"
 		if not bedgraphout in bedgraphouts:
@@ -392,76 +390,6 @@ def main5(directory_of_sortedbams):
 				line = f.readline()
                 	wf.close()
                 	f.close()
-
-
-
-def main6(directory_of_sortedbams):
-	#/projects/Down/Downseq/GROseq/gro100814/bowtie2/sortedbam/genomecoveragebed/fortdf
-        dic_mapped = {}
-        list_num = []
-        outdir = os.path.join(directory_of_sortedbams, "/genomecoveragebed/fortdf/")
-	outdir = directory_of_sortedbams+"/genomecoveragebed/fortdf/"
-	print "outdir is", outdir
-	bedgraphs = [bedfile for bedfile in glob.glob(os.path.join(outdir, '*.BedGraph'))]
-	#GRO177_100814.fastqbowtie2.sorted.bam.flagstat
-        for sorted_bam_file_and_path in glob.glob(os.path.join(directory_of_sortedbams, '*sorted.bam.flagstat')):
-                bamfileroot = sorted_bam_file_and_path.split("/")[-1]
-		bamfileroot = bamfileroot.split(".sorted")[0]
-		#GRO177_100814.fastqbowtie2
-		f = open(sorted_bam_file_and_path)
-		lines = f.readlines()
-                mapped_reads =lines[2]
-                mapped_reads = int(mapped_reads.split(" ")[0])
-                dic_mapped[bamfileroot] = mapped_reads
-                list_num.append(mapped_reads)
-		f.close()
-	print dic_mapped
-	for sorted_bam_file_and_path in glob.glob(os.path.join(directory_of_sortedbams, '*.bam.flagstat')):
-                bamfileroot = sorted_bam_file_and_path.split("/")[-1]
-		bamfileroot = bamfileroot.split(".bam")[0]
-		#GRO177_100814.fastqbowtie2
-		f = open(sorted_bam_file_and_path)
-		lines = f.readlines()
-		print sorted_bam_file_and_path
-		print lines
-                mapped_reads =lines[2]
-                mapped_reads = int(mapped_reads.split(" ")[0])
-                dic_mapped[bamfileroot] = mapped_reads
-                list_num.append(mapped_reads)
-		f.close()
-	print dic_mapped	
-        max_num = max(list_num)
-	bedgraphouts = [filename for filename in glob.glob(os.path.join(outdir, '*.mp.BedGraph'))]
-        for bamfile in glob.glob(os.path.join(directory_of_sortedbams, '*.sorted.bam')):
-                bamfileroot = bamfile.split("/")[-1]
-		bamfileroot = bamfileroot.split(".sorted")[0]
-#		GRO177_100814.fastqbowtie2.BedGraph
-		bedgraph = outdir+bamfileroot+".sorted.BedGraph"
-		print bedgraph
-		total_reads = dic_mapped[bamfileroot]
-		print total_reads
-                bedgraphout = bedgraph+".mp.BedGraph"
-		if not bedgraphout in bedgraphouts:
-	        	f = open(bedgraph)
-        		wf = open(bedgraphout, "w")
-			print "createing", bedgraphout
-			line = f.readline()
-                	while line:
-                        	line = line.strip("\n")
-                        	line = line.split("\t")
-				if len(line)<3:
-					try:
-						line = line[0].split(" ")
-					except:
-						print line
-	                        chr, start, stop, num_of_reads = line
-        		        frag = calmp(float(num_of_reads), total_reads)
-                		newline = "\t".join([chr, start, stop, str(frag)])+"\n"
-                        	wf.write(newline)
-				line = f.readline()
-                	wf.close()
-                	f.close()
-
 
 
 
@@ -514,9 +442,8 @@ if __name__=="__main__":
 #	try:
 #	sh_for_cat_bedgraphs2(sys.argv[1])
 #	main4(sys.argv[1])
-	main5(sys.argv[1])
-#	main6(sys.argv[1])
-#	main5_modifiedforthingsthatendwith15(sys.argv[1])
+#	main5(sys.argv[1])
+	main7(sys.argv[1])
 #	except:
 #		print "python readcount_corrected_geneomeBedgraphs.py <directory_of_sortedbams>"
 
