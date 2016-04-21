@@ -63,11 +63,11 @@ def run():
     #check_job.run(job,tempdir)
     print "done\nCorrecting for readcounts..."
     readcount_correction.run(scriptdir, fullpath)
-    print "done\nCreating IGV files..."
-    igv_create.run(scriptdir, fullpath)
-    print "done\nGetting millions mapped reads..."
-    millions_mapped.run(scriptdir, fullpath)
-    print "done"
+    #print "done\nCreating IGV files..."
+    #igv_create.run(scriptdir, fullpath)
+    #print "done\nGetting millions mapped reads..."
+    #millions_mapped.run(scriptdir, fullpath)
+    #print "done"
     
     
     
