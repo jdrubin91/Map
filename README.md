@@ -9,7 +9,7 @@ If this is not the case, bowtie index path must be changed in Map/scripts/bowtie
 
 To run:
 1. Go into Map/
-2. python src/ <full/path/to/SRA/> ('/' at the end of path is necessary)
+2. python src/ /full/path/to/SRA/ ('/' at the end of path is necessary)
 
 This package will check whether jobs have been completed every 10 seconds.  This can be changed in Map/src/check_job.py.
 
