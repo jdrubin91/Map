@@ -15,7 +15,6 @@ def main(directory_of_sortedbams):
 	outdir = directory_of_sortedbams + "/genomecoveragebed/fortdf/"
 	print "outdir is", outdir
         for sorted_bam_file_and_path in glob.glob(os.path.join(directory_of_sortedbams, '*sorted.bam.flagstat')):
-                print sorted_bam_file_and_path
                 bamfileroot = sorted_bam_file_and_path.split("/")[-1].split(".sorted")[0]
 		f = open(sorted_bam_file_and_path)
 		lines = f.readlines()
