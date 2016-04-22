@@ -54,13 +54,13 @@ def run():
     job = flip_reads.run(scriptdir, fullpath, tempdir)
     check_job.run(job,tempdir)
     print "done\nConverting Fastq to SAM..."
-    fastq_to_sam.run(scriptdir, fullpath, tempdir)
+    job = fastq_to_sam.run(scriptdir, fullpath, tempdir)
     check_job.run(job,tempdir)
     print "done\nConverting SAM to BAM..."
-    sam_to_bam.run(scriptdir, fullpath, tempdir)
+    job = sam_to_bam.run(scriptdir, fullpath, tempdir)
     check_job.run(job,tempdir)
     print "done\nConverting BAM to Bedgraph..."
-    bam_to_bedgraph.run(scriptdir, fullpath, tempdir)
+    job = bam_to_bedgraph.run(scriptdir, fullpath, tempdir)
     check_job.run(job,tempdir)
     print "done\nCorrecting for readcounts..."
     readcount_correction.run(scriptdir, fullpath)
