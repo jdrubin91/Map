@@ -4,6 +4,7 @@ __author__ = 'Jonathan Rubin'
 #module load sra_2.3.2-5
 #module load samtools_0.1.19
 
+import sys
 import os
 import sra_to_fastq
 import check_job
@@ -20,7 +21,7 @@ import millions_mapped
 #User-defined input
 #======================================================================
 #Give full path to SRA files (remember to include a '/' at the end)
-fullpath = '/scratch/Users/joru1876/test/'
+fullpath = sys.argv[1]
 #======================================================================
 
 
