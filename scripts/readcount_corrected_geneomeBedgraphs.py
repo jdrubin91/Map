@@ -8,7 +8,7 @@ def calmp(num_of_reads, total_reads):
         mp = int(num_of_reads)/(int(total_reads)/1000000)
         return mp
 
-
+#Normalize bedgraphs to millions mapped reads
 def main(directory_of_sortedbams):
         dic_mapped = {}
         list_num = []
@@ -19,8 +19,8 @@ def main(directory_of_sortedbams):
                 bamfileroot = sorted_bam_file_and_path.split("/")[-1].split(".sorted")[0]
 		f = open(sorted_bam_file_and_path)
 		lines = f.readlines()
-                mapped_reads =lines[2]
-                mapped_reads = int(mapped_reads.split(" ")[0])
+                mapped_reads = int(lines[2].split(" ")[0])
+                #mapped_reads = int(mapped_reads.split(" ")[0])
                 dic_mapped[bamfileroot] = mapped_reads
                 list_num.append(mapped_reads)
 		f.close()
