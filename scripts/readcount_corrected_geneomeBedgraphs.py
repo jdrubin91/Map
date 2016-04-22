@@ -15,10 +15,10 @@ def main(directory_of_sortedbams):
 	outdir = directory_of_sortedbams + "/genomecoveragebed/fortdf/"
 	print "outdir is", outdir
         for sorted_bam_file_and_path in glob.glob(os.path.join(directory_of_sortedbams, '*sorted.bam.flagstat')):
-                #bamfileroot = sorted_bam_file_and_path.split("/")[-1]
-                #print "bamfileroot1: ", bamfileroot
-		bamfileroot = bamfileroot.split(".sorted")[0]
-		print "bamfileroot: ", bamfileroot
+                bamfileroot = sorted_bam_file_and_path.split("/")[-1].split(".sorted")[0]
+  #              print "bamfileroot1: ", bamfileroot
+		#bamfileroot = bamfileroot.split(".sorted")[0]
+		#print "bamfileroot: ", bamfileroot
 		f = open(sorted_bam_file_and_path)
 		lines = f.readlines()
                 mapped_reads =lines[2]
