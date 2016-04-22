@@ -442,8 +442,8 @@ if __name__=="__main__":
 #	try:
 #	sh_for_cat_bedgraphs2(sys.argv[1])
 #	main4(sys.argv[1])
-#	main5(sys.argv[1])
-	main7(sys.argv[1])
+	main5(sys.argv[1])
+	#main7(sys.argv[1])
 #	except:
 #		print "python readcount_corrected_geneomeBedgraphs.py <directory_of_sortedbams>"
 
