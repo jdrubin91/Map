@@ -1,4 +1,5 @@
 __author__ = 'Jonathan Rubin'
+#Scripts adapted from Josephina Hendrix and Mary Allen
 
 #Required modules: 
 #module load sra_2.3.2-5
@@ -44,30 +45,49 @@ tempdir = parent_dir(homedir) + '/temp'
 
 def run():
     print "SRA filepath: ", fullpath
-    #print "Converting SRA to Fastq..."
-    #job = sra_to_fastq.run(scriptdir, fullpath, tempdir)
-    #check_job.run(job,tempdir)
+    
+    #Converts SRA to Fastq format
+    print "Converting SRA to Fastq..."
+    job = sra_to_fastq.run(scriptdir, fullpath, tempdir)
+    check_job.run(job,tempdir)
+    
+    #Checks read quality
     print "done\nChecking quality..."
     job = quality_check.run(scriptdir, fullpath, tempdir)
     check_job.run(job,tempdir)
+    
+    #Flips reads (use for some GRO-Seq protocols
     print "done\nFlipping Reads..."
     job = flip_reads.run(scriptdir, fullpath, tempdir)
     check_job.run(job,tempdir)
+    
+    #Converts Fastq to SAM format
     print "done\nConverting Fastq to SAM..."
     job = fastq_to_sam.run(scriptdir, fullpath, tempdir)
     check_job.run(job,tempdir)
+    
+    #Converts SAM to BAM format
     print "done\nConverting SAM to BAM..."
     job = sam_to_bam.run(scriptdir, fullpath, tempdir)
     check_job.run(job,tempdir)
+    
+    #Converts BAM to Bedgraph format
     print "done\nConverting BAM to Bedgraph..."
     job = bam_to_bedgraph.run(scriptdir, fullpath, tempdir)
     check_job.run(job,tempdir)
+    
+    #Normalizes bedgraphs to millions mapped
     print "done\nCorrecting for readcounts..."
     readcount_correction.run(scriptdir, fullpath)
+    
+    #Creates IGV scripts 
     print "done\nCreating IGV files..."
     igv_create.run(scriptdir, fullpath)
+    
+    
     print "done\nGetting millions mapped reads..."
     millions_mapped.run(scriptdir, fullpath)
+    
     print "done"
     
     
