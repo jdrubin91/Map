@@ -1,8 +1,8 @@
 # Map
 
-This package requires the following modules:
-module load sra_2.3.2-5
-module load samtools_0.1.19
+This package requires the following modules:\n
+module load sra_2.3.2-5\n
+module load samtools_0.1.19\n
 
 Additionally, this package requires that you have access to /projects on the compute cluster in CU Boulder
 If this is not the case, bowtie index path must be changed in Map/scripts/bowtieafastq.sh and genome path must be changed in Map/scripts/bam_to_5primebed.sh
