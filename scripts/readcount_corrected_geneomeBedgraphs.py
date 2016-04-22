@@ -20,7 +20,6 @@ def main(directory_of_sortedbams):
 		f = open(sorted_bam_file_and_path)
 		lines = f.readlines()
                 mapped_reads = int(lines[2].split(" ")[0])
-                #mapped_reads = int(mapped_reads.split(" ")[0])
                 dic_mapped[bamfileroot] = mapped_reads
                 list_num.append(mapped_reads)
 		f.close()
@@ -28,7 +27,7 @@ def main(directory_of_sortedbams):
         for bamfile in glob.glob(os.path.join(directory_of_sortedbams, '*.sorted.bam')):
                 bamfileroot = bamfile.split("/")[-1]
 		bamfileroot = bamfileroot.split(".sorted")[0]
-		bedgraph = outdir+bamfileroot+".BedGraph"
+		bedgraph = outdir+bamfileroot+".sorted.BedGraph"
 		print bedgraph
                 total_reads = dic_mapped[bamfileroot]
 		print total_reads
