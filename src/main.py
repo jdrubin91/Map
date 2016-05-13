@@ -7,6 +7,7 @@ __author__ = 'Jonathan Rubin'
 
 import sys
 import os
+import write_scripts
 import sra_to_fastq
 import check_job
 import quality_check
@@ -23,6 +24,20 @@ import millions_mapped
 #======================================================================
 #Give full path to SRA files (remember to include a '/' at the end)
 fullpath = sys.argv[1]
+
+#Give full path to desired genome construct
+genome='/projects/dowellLab/groseq/forJoey/human.hg19.genome'
+#genome=/projects/dowellLab/groseq/forJoey/dro/dm3.fa.genome
+#genome=/projects/dowellLab/groseq/forJoey/mm10.genome
+
+#Give full path to bowtie indexes, these can be created with bowtie and a fasta file of your genome
+bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/hg19_Bowtie2_indexp32'
+#bowtieindex=/projects/Down/Dowellseq/genomes/bowtiebwaindexs/mm10_Bowtie2_index
+#bowtieindex=/projects/Down/Dowellseq/genomes/bowtiebwaindexs/dm3.fa.Bowtie2
+#bowtieindex=/projects/Down/Dowellseq/genomes/bowtiebwaindexs/ERCC92_Bowtie2_index
+
+#Flip reads?
+flip = True
 #======================================================================
 
 
@@ -46,8 +61,12 @@ tempdir = parent_dir(homedir) + '/temp'
 def run():
     print "SRA filepath: ", fullpath
     
+    #Writes script files based on genome and bowtie index
+    print "Writing script files..."
+    write_scripts.run()
+    
     #Converts SRA to Fastq format
-    print "Converting SRA to Fastq..."
+    print "done\nConverting SRA to Fastq..."
     job = sra_to_fastq.run(scriptdir, fullpath, tempdir)
     check_job.run(job,tempdir)
     
@@ -56,10 +75,11 @@ def run():
     job = quality_check.run(scriptdir, fullpath, tempdir)
     check_job.run(job,tempdir)
     
-    #Flips reads (use for some GRO-Seq protocols
-    print "done\nFlipping Reads..."
-    job = flip_reads.run(scriptdir, fullpath, tempdir)
-    check_job.run(job,tempdir)
+    #Flips reads (use for some GRO-Seq protocols)
+    if flip:
+        print "done\nFlipping Reads..."
+        job = flip_reads.run(scriptdir, fullpath, tempdir)
+        check_job.run(job,tempdir)
     
     #Converts Fastq to SAM format
     print "done\nConverting Fastq to SAM..."
