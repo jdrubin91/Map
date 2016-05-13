@@ -34,7 +34,7 @@ def main(directory_of_sortedbams):
 		if not bedgraphout in bedgraphouts:
 	        	f = open(bedgraph)
         		wf = open(bedgraphout, "w")
-			print "createing", bedgraphout
+			print "creating", bedgraphout
 			line = f.readline()
                 	while line:
                         	line = line.strip("\n")

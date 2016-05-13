@@ -8,8 +8,6 @@
 
 
 #PBS -m ae
-#PBS -o /scratch/Users/joru1876/qsub_stdo/
-#PBS -e /scratch/Users/joru1876/qsub_errors/
 
 ### Switch to the working directory; by default TORQUE launches processes
 ### from your home directory.  This is a good idea because your -o and -e files 

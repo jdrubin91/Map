@@ -6,7 +6,7 @@ def run(scriptdir, fullpath, tempdir):
     outfile = open(scriptdir + '/runbam_to_5primebed.sh', 'w')
     outfile.write("indir=" + fullpath + "flipped/bowtie2/sortedbam/\n")
     outfile.write("odir=" + fullpath + "flipped/bowtie2/sortedbam/\n")
-    outfile.write("for pathandfilename in `ls $indir*.bam`; do\n")
+    outfile.write("for pathandfilename in `ls $indir*.sorted.bam`; do\n")
     outfile.write("entry=`basename $pathandfilename .bam`\n")
     outfile.write("infilename=$pathandfilename\n")
     outfile.write("otfile1=${entry}.fiveprime.pos.BedGraph\n")
