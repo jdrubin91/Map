@@ -7,8 +7,6 @@
 #PBS -l nodes=1:ppn=32
 
 
-#PBS -m ae
-
 ### Switch to the working directory; by default TORQUE launches processes
 ### from your home directory.  This is a good idea because your -o and -e files 
 ### will go here

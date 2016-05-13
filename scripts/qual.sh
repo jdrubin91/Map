@@ -3,7 +3,6 @@
 #PBS -l nodes=1:ppn=1
 #PBS -e /projects/dowellLab/groseq/pubgro/o_and_e/
 #PBS -o /projects/dowellLab/groseq/pubgro/o_and_e/
-#PBS -m ae
 
 ### Switch to the working directory; by default TORQUE launches processes
 ### from your home directory.  This is a good idea because your -o and -e files 

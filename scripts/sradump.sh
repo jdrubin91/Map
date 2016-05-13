@@ -8,7 +8,6 @@
 ### Specify the number of nodes and processors for your job
 #PBS -l nodes=1:ppn=1
 
-#PBS -m ae
 #PBS -o /projects/dowellLab/groseq/pubgro/e_and_o/
 #PBS -e /projects/dowellLab/groseq/pubgro/e_and_o/
 
