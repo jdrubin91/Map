@@ -60,6 +60,9 @@ scriptdir = parent_dir(homedir) + '/scripts'
 #Temporary files directory
 tempdir = parent_dir(homedir) + '/temp'
 
+#Directory to temporary job file
+job = tempdir + "/Job_ID.txt"
+
 
 def run():
     print "SRA filepath: ", fullpath
@@ -70,42 +73,44 @@ def run():
     
     #Converts SRA to Fastq format
     print "done\nConverting SRA to Fastq..."
-    job = sra_to_fastq.run(scriptdir, fullpath, tempdir)
+    sra_to_fastq.run(scriptdir, fullpath, tempdir)
     check_job.run(job,tempdir)
     
     #Checks read quality
     print "done\nChecking quality..."
-    job = quality_check.run(scriptdir, fullpath, tempdir)
+    quality_check.run(scriptdir, fullpath, tempdir)
     check_job.run(job,tempdir)
     
     #Flips reads (use for some GRO-Seq protocols)
     if flip:
         print "done\nFlipping Reads..."
-        job = flip_reads.run(scriptdir, fullpath, tempdir)
+        newpath = flip_reads.run(scriptdir, fullpath, tempdir)
         check_job.run(job,tempdir)
+    else:
+        newpath = fullpath
     
     #Converts Fastq to SAM format
     print "done\nConverting Fastq to SAM..."
-    job = fastq_to_sam.run(scriptdir, fullpath, tempdir)
+    newpath = fastq_to_sam.run(scriptdir, newpath, tempdir)
     check_job.run(job,tempdir)
     
     #Converts SAM to BAM format
     print "done\nConverting SAM to BAM..."
-    job = sam_to_bam.run(scriptdir, fullpath, tempdir)
+    newpath = sam_to_bam.run(scriptdir, newpath, tempdir)
     check_job.run(job,tempdir)
     
     #Converts BAM to Bedgraph format
     print "done\nConverting BAM to Bedgraph..."
-    job = bam_to_bedgraph.run(scriptdir, fullpath, tempdir)
+    bam_to_bedgraph.run(scriptdir, newpath, tempdir)
     check_job.run(job,tempdir)
     
     #Normalizes bedgraphs to millions mapped
     print "done\nCorrecting for readcounts..."
-    readcount_correction.run(scriptdir, fullpath)
+    readcount_correction.run(scriptdir, newpath)
     
     #Creates IGV scripts 
     print "done\nCreating IGV files..."
-    igv_create.run(scriptdir, fullpath)
+    igv_create.run(scriptdir, newpath)
     
     
     print "done\nGetting millions mapped reads..."

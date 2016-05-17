@@ -1,7 +1,6 @@
 #PBS -V
 #PBS -q longmem
 #PBS -l walltime=96:00:00
-#PBS -m abe
 #PBS -l nodes=1:ppn=1
 ### Use the bourne shell
 #PBS -S /bin/sh

@@ -2,10 +2,10 @@ __author__ = 'Jonathan Rubin'
 
 import os
 
-def run(scriptdir, fullpath, tempdir):
+def run(scriptdir, newpath, tempdir):
     outfile = open(scriptdir + '/runbam_to_5primebed.sh', 'w')
-    outfile.write("indir=" + fullpath + "flipped/bowtie2/sortedbam/\n")
-    outfile.write("odir=" + fullpath + "flipped/bowtie2/sortedbam/\n")
+    outfile.write("indir=" + newpath + "\n")
+    outfile.write("odir=" + newpath + "\n")
     outfile.write("for pathandfilename in `ls $indir*.sorted.bam`; do\n")
     outfile.write("entry=`basename $pathandfilename .bam`\n")
     outfile.write("infilename=$pathandfilename\n")
@@ -21,5 +21,3 @@ def run(scriptdir, fullpath, tempdir):
     outfile.close()
     
     os.system("bash " + scriptdir + "/runbam_to_5primebed.sh > " + tempdir + "/Job_ID.txt")
-    
-    return tempdir + "/Job_ID.txt"

@@ -18,4 +18,4 @@ def run(scriptdir, fullpath, tempdir):
     
     os.system("bash " + scriptdir + "/runflipfastq.sh > " + tempdir + "/Job_ID.txt")
     
-    return tempdir + "/Job_ID.txt"
+    return fullpath + 'flipped/'

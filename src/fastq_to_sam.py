@@ -2,10 +2,10 @@ __author__ = 'Jonathan Rubin'
 
 import os
 
-def run(scriptdir, fullpath, tempdir):
+def run(scriptdir, newpath, tempdir):
     outfile = open(scriptdir + '/runbowtiedir.sh', 'w')
-    outfile.write("od=" + fullpath + "flipped/bowtie2/\n")
-    outfile.write("indir=" + fullpath + "flipped/\n")
+    outfile.write("od=" + newpath + "bowtie2/\n")
+    outfile.write("indir=" + newpath + "\n")
     outfile.write("mkdir -p $od\n")
     outfile.write("for pathandfilename in `ls $indir*.fastq`; do\n")
     outfile.write("entry=`basename $pathandfilename`\n")
@@ -20,4 +20,4 @@ def run(scriptdir, fullpath, tempdir):
     
     os.system("bash " + scriptdir + "/runbowtiedir.sh > " + tempdir + "/Job_ID.txt")
     
-    return tempdir + "/Job_ID.txt"
+    return newpath + 'bowtie2/'
