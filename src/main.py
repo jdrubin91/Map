@@ -69,7 +69,7 @@ def run():
     
     #Writes script files based on genome and bowtie index
     print "Writing script files..."
-    write_scripts.run(scriptdir,genome, bowtieindex)
+    write_scripts.run(scriptdir,genome, bowtieindex,bowtieoptions)
     
     #Converts SRA to Fastq format
     print "done\nConverting SRA to Fastq..."
