@@ -2,7 +2,7 @@ __author__ = 'Jonathan Rubin'
 
 import os
 
-def run(scriptdir,genome, bowtieindex):
+def run(scriptdir,genome, bowtieindex, bowtieoptions):
     outfile = open(scriptdir + '/bam_to_5primebed.sh', 'w')
     outfile.write("### Run in desired queue\n")
     outfile.write("#PBS -q long8gb\n")
@@ -49,7 +49,7 @@ def run(scriptdir,genome, bowtieindex):
     outfile2.write("#PBS -V\n")
     outfile2.write("echo $fastq1pathandfile\n")
     outfile2.write("echo ${outdir}${outfile}.sam\n")
-    outfile2.write("/opt/bowtie/bowtie2-2.0.2/bowtie2 -p32 --very-sensitive \\\n")
+    outfile2.write("/opt/bowtie/bowtie2-2.0.2/bowtie2 " + bowtieoptions + " \\\n")
     outfile2.write(bowtieindex + " \\\n")
     outfile2.write("-U $fastq1pathandfile \\\n")
     outfile2.write("> ${outdir}${outfile}.sam \\\n")

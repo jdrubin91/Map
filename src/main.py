@@ -36,6 +36,9 @@ bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/hg19_Bowtie2_index
 #bowtieindex=/projects/Down/Dowellseq/genomes/bowtiebwaindexs/dm3.fa.Bowtie2
 #bowtieindex=/projects/Down/Dowellseq/genomes/bowtiebwaindexs/ERCC92_Bowtie2_index
 
+#Specify bowtie options
+bowtieoptions = "-p32 --very-sensitive"
+
 #Flip reads?
 flip = True
 #======================================================================
