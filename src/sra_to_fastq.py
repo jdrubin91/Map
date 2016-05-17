@@ -18,3 +18,5 @@ def run(scriptdir, fullpath, tempdir):
         outfile.close()
         
         os.system("bash " + scriptdir + "/runsradump.sh")
+    
+    return boolean

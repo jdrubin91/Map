@@ -65,7 +65,7 @@ job = tempdir + "/Job_ID.txt"
 
 
 def run():
-    print "SRA filepath: ", fullpath
+    print "Filepath: ", fullpath
     
     #Writes script files based on genome and bowtie index
     print "Writing script files..."
@@ -73,11 +73,15 @@ def run():
     
     #Converts SRA to Fastq format
     print "done\nConverting SRA to Fastq..."
-    sra_to_fastq.run(scriptdir, fullpath, tempdir)
-    check_job.run(job,tempdir)
+    boolean = sra_to_fastq.run(scriptdir, fullpath, tempdir)
+    if boolean:
+        check_job.run(job,tempdir)
+        print "done"
+    else:
+        print "No SRA files in filepath"
     
     #Checks read quality
-    print "done\nChecking quality..."
+    print "Checking quality..."
     quality_check.run(scriptdir, fullpath, tempdir)
     check_job.run(job,tempdir)
     
