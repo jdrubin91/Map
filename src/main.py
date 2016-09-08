@@ -41,7 +41,7 @@ bowtieoptions = "-p32 -k 1 -n 2 -l 36 --best"
 #bowtieoptions = "-p32 --very-sensitive"
 
 #Flip reads?
-flip = True
+flip = False
 #======================================================================
 
 
