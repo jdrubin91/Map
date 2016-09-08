@@ -7,6 +7,9 @@
 ### Use the bourne shell
 #PBS -S /bin/sh
 
+### Set your email address
+#PBS -m ae
+#PBS -M joru1876@colorado.edu
 
 cd $PBS_O_WORKDIR
 echo Working directory is $PBS_O_WORKDIR

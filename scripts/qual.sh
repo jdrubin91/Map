@@ -4,6 +4,10 @@
 #PBS -e /projects/dowellLab/groseq/pubgro/o_and_e/
 #PBS -o /projects/dowellLab/groseq/pubgro/o_and_e/
 
+### Set your email address
+#PBS -m ae
+#PBS -M joru1876@colorado.edu
+
 ### Switch to the working directory; by default TORQUE launches processes
 ### from your home directory.  This is a good idea because your -o and -e files 
 ### will go here
