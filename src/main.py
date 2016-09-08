@@ -37,8 +37,8 @@ bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/hg19_Bowtie2_index
 #bowtieindex=/projects/Down/Dowellseq/genomes/bowtiebwaindexs/ERCC92_Bowtie2_index
 
 #Specify bowtie options
-bowtieoptions = "-p32 -k 1 -n 2 -l 36 --best"
-#bowtieoptions = "-p32 --very-sensitive"
+# bowtieoptions = "-p32 -k 1 -n 2 -l 36 --best"
+bowtieoptions = "-p32 --very-sensitive"
 
 #Flip reads?
 flip = False
