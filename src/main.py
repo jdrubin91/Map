@@ -26,15 +26,25 @@ import millions_mapped
 fullpath = sys.argv[1]
 
 #Give full path to desired genome construct
-genome='/projects/dowellLab/groseq/forJoey/human.hg19.genome'
-#genome=/projects/dowellLab/groseq/forJoey/dro/dm3.fa.genome
-#genome=/projects/dowellLab/groseq/forJoey/mm10.genome
+# genome='/projects/dowellLab/groseq/forJoey/human.hg19.genome'
+#genome='/projects/dowellLab/groseq/forJoey/dro/dm3.fa.genome'
+#genome='/projects/dowellLab/groseq/forJoey/mm10.genome'
+genome='/projects/Down/Dowellseq/genomes/LBS-1.genome'
+# genome='/projects/Down/Dowellseq/genomes/A-region.genome'
+# genome='/projects/Down/Dowellseq/genomes/LBS-3.genome'
+# genome='/projects/Down/Dowellseq/genomes/C-unit.genome'
 
 #Give full path to bowtie indexes, these can be created with bowtie and a fasta file of your genome
-bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/hg19_Bowtie2_indexp32'
-#bowtieindex=/projects/Down/Dowellseq/genomes/bowtiebwaindexs/mm10_Bowtie2_index
-#bowtieindex=/projects/Down/Dowellseq/genomes/bowtiebwaindexs/dm3.fa.Bowtie2
-#bowtieindex=/projects/Down/Dowellseq/genomes/bowtiebwaindexs/ERCC92_Bowtie2_index
+# bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/hg19_Bowtie2_indexp32'
+#bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/mm10_Bowtie2_index'
+#bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/dm3.fa.Bowtie2'
+#bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/ERCC92_Bowtie2_index'
+bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-1'
+# bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/A-region'
+# bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-3'
+# bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/C-unit'
+
+
 
 #Specify bowtie options
 # bowtieoptions = "-p32 -k 1 -n 2 -l 36 --best"
