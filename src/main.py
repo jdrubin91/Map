@@ -103,10 +103,8 @@ def run():
             g = SpikeIngenomes[i]
             b = SpikeInbowtieindexes[i]
             write_scripts.run(scriptdir,g,b,bowtieoptions)
-            newpath = fullpath + 'bowtie2/'
             fastq_to_sam.run(scriptdir, newpath, tempdir)
             check_job.run(job,tempdir)
-        newpath = fullpath
 
 
 
