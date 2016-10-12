@@ -99,12 +99,14 @@ def run():
     
     if spike:
         print "done\nChecking Spike-in Controls..."
+        newpath = newpath + 'bowtie2/'
         for i in range(len(SpikeIngenomes)):
             g = SpikeIngenomes[i]
             b = SpikeInbowtieindexes[i]
             write_scripts.run(scriptdir,g,b,bowtieoptions)
-            newpath = fastq_to_sam.run(scriptdir, newpath, tempdir)
+            fastq_to_sam.run(scriptdir, newpath, tempdir)
             check_job.run(job,tempdir)
+        newpath = fullpath
 
 
 
