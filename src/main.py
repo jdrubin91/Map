@@ -26,24 +26,18 @@ import millions_mapped
 fullpath = sys.argv[1]
 
 #Give full path to desired genome construct
-# genome='/projects/dowellLab/groseq/forJoey/human.hg19.genome'
+genome='/projects/dowellLab/groseq/forJoey/human.hg19.genome'
 #genome='/projects/dowellLab/groseq/forJoey/dro/dm3.fa.genome'
 #genome='/projects/dowellLab/groseq/forJoey/mm10.genome'
-genome='/projects/Down/Dowellseq/genomes/LBS-1.genome'
-# genome='/projects/Down/Dowellseq/genomes/A-region.genome'
-# genome='/projects/Down/Dowellseq/genomes/LBS-3.genome'
-# genome='/projects/Down/Dowellseq/genomes/C-unit.genome'
+SpikeIngenomes=['/projects/Down/Dowellseq/genomes/LBS-1.genome','/projects/Down/Dowellseq/genomes/A-region.genome','/projects/Down/Dowellseq/genomes/LBS-3.genome','/projects/Down/Dowellseq/genomes/C-unit.genome']
+
 
 #Give full path to bowtie indexes, these can be created with bowtie and a fasta file of your genome
-# bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/hg19_Bowtie2_indexp32'
+bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/hg19_Bowtie2_indexp32'
 #bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/mm10_Bowtie2_index'
 #bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/dm3.fa.Bowtie2'
 #bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/ERCC92_Bowtie2_index'
-bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-1'
-# bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/A-region'
-# bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-3'
-# bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/C-unit'
-
+SpikeInbowtieindexes=['/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-1','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/A-region','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-3','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/C-unit']
 
 
 #Specify bowtie options
@@ -52,6 +46,9 @@ bowtieoptions = "-p32 --very-sensitive"
 
 #Flip reads?
 flip = False
+
+#Check for Spike-In controls?
+spike= True
 #======================================================================
 
 
@@ -78,12 +75,8 @@ job = tempdir + "/Job_ID.txt"
 def run():
     print "Filepath: ", fullpath
     
-    #Writes script files based on genome and bowtie index
-    print "Writing script files..."
-    write_scripts.run(scriptdir,genome, bowtieindex,bowtieoptions)
-    
     #Converts SRA to Fastq format
-    print "done\nConverting SRA to Fastq..."
+    print "Converting SRA to Fastq..."
     boolean = sra_to_fastq.run(scriptdir, fullpath, tempdir)
     if boolean:
         check_job.run(job,tempdir)
@@ -92,7 +85,7 @@ def run():
         print "No SRA files in filepath"
     
     #Checks read quality
-    print "Checking quality..."
+    print "done\nChecking quality..."
     quality_check.run(scriptdir, fullpath, tempdir)
     check_job.run(job,tempdir)
     
@@ -104,6 +97,21 @@ def run():
     else:
         newpath = fullpath
     
+    if spike:
+        print "done\nChecking Spike-in Controls..."
+        for i in range(len(SpikeIngenomes)):
+            g = SpikeIngenomes[i]
+            b = SpikeInbowtieindexes[i]
+            write_scripts.run(scriptdir,g,b,bowtieoptions)
+            newpath = fastq_to_sam.run(scriptdir, newpath, tempdir)
+            check_job.run(job,tempdir)
+
+
+
+    #Writes script files based on genome and bowtie index
+    print "done\nWriting script files..."
+    write_scripts.run(scriptdir,genome,bowtieindex,bowtieoptions)
+
     #Converts Fastq to SAM format
     print "done\nConverting Fastq to SAM..."
     newpath = fastq_to_sam.run(scriptdir, newpath, tempdir)
