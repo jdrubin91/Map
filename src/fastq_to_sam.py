@@ -13,7 +13,7 @@ def run(scriptdir, newpath, tempdir, genome, boolean=True):
     outfile.write("for pathandfilename in `ls $indir*.fastq`; do\n")
     outfile.write("entry=`basename $pathandfilename`\n")
     if not boolean:
-        outfile.write("entry=${entry}"+genome.split('/')[-1].split('.')[0]+"\n")
+        outfile.write("entry=${entry}."+genome.split('/')[-1].split('.')[0]+"\n")
     outfile.write("echo $entry\n")
     outfile.write("fq1=$entry\n")
     outfile.write("ofile=${entry}.bowtie2\n")
