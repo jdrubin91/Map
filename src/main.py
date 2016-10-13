@@ -103,6 +103,7 @@ def run():
     
     if spike:
         print "done\nChecking Spike-in Controls..."
+        os.mkdir(newpath + 'bowtie2/')
         for i in range(len(SpikeIngenomes)):
             print "Checking reads mapped to: " + SpikeInbowtieindexes[i].split('/')[-1]
             g = SpikeIngenomes[i]
