@@ -2,11 +2,12 @@ __author__ = 'Jonathan Rubin'
 
 import os
 
-def run(scriptdir, newpath, tempdir, genome):
+def run(scriptdir, newpath, tempdir, genome, boolean=True):
     outfile = open(scriptdir + '/runbowtiedir.sh', 'w')
     outfile.write("od=" + newpath + "bowtie2/\n")
     outfile.write("indir=" + newpath + "\n")
-    outfile.write("mkdir -p $od\n")
+    if boolean:
+        outfile.write("mkdir -p $od\n")
     outfile.write("for pathandfilename in `ls $indir*.fastq`; do\n")
     outfile.write("entry=`basename $pathandfilename _" + genome + "`\n")
     outfile.write("echo $entry\n")

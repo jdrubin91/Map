@@ -29,6 +29,8 @@ fullpath = sys.argv[1]
 genome='/projects/dowellLab/groseq/forJoey/human.hg19.genome'
 #genome='/projects/dowellLab/groseq/forJoey/dro/dm3.fa.genome'
 #genome='/projects/dowellLab/groseq/forJoey/mm10.genome'
+
+#Path to spike-in control genomes
 SpikeIngenomes=['/projects/Down/Dowellseq/genomes/LBS-1.genome','/projects/Down/Dowellseq/genomes/A-region.genome','/projects/Down/Dowellseq/genomes/LBS-3.genome','/projects/Down/Dowellseq/genomes/C-unit.genome']
 
 
@@ -37,6 +39,8 @@ bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/hg19_Bowtie2_index
 #bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/mm10_Bowtie2_index'
 #bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/dm3.fa.Bowtie2'
 #bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/ERCC92_Bowtie2_index'
+
+#Path to spike-in control bowtie indexes
 SpikeInbowtieindexes=['/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-1','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/A-region','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-3','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/C-unit']
 
 
@@ -44,10 +48,10 @@ SpikeInbowtieindexes=['/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-1','
 # bowtieoptions = "-p32 -k 1 -n 2 -l 36 --best"
 bowtieoptions = "-p32 --very-sensitive"
 
-#Flip reads?
+#Flip reads? This is used for some GRO-Seq protocols
 flip = False
 
-#Check for Spike-In controls?
+#Check for Spike-In controls? Only True if you added spike-in controls from Jonathan Rubin to your GRO-Seq samples
 spike= True
 #======================================================================
 
@@ -100,10 +104,11 @@ def run():
     if spike:
         print "done\nChecking Spike-in Controls..."
         for i in range(len(SpikeIngenomes)):
+            print "Checking reads mapped to: " + SpikeInbowtieindexes[i].split('/')[-1]
             g = SpikeIngenomes[i]
             b = SpikeInbowtieindexes[i]
             write_scripts.run(scriptdir,g,b,bowtieoptions)
-            fastq_to_sam.run(scriptdir, newpath, tempdir,g)
+            fastq_to_sam.run(scriptdir, newpath, tempdir,g,boolean=False)
             check_job.run(job,tempdir)
 
 
