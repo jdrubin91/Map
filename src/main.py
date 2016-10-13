@@ -103,7 +103,7 @@ def run():
             g = SpikeIngenomes[i]
             b = SpikeInbowtieindexes[i]
             write_scripts.run(scriptdir,g,b,bowtieoptions)
-            fastq_to_sam.run(scriptdir, newpath, tempdir)
+            fastq_to_sam.run(scriptdir, newpath, tempdir,g)
             check_job.run(job,tempdir)
 
 
@@ -114,7 +114,7 @@ def run():
 
     #Converts Fastq to SAM format
     print "done\nConverting Fastq to SAM..."
-    newpath = fastq_to_sam.run(scriptdir, newpath, tempdir)
+    newpath = fastq_to_sam.run(scriptdir, newpath, tempdir, genome)
     check_job.run(job,tempdir)
     
     #Converts SAM to BAM format
