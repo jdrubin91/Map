@@ -109,6 +109,8 @@ def run():
         print "done\nChecking Spike-in Controls..."
         if not os.path.exists(newpath + 'bowtie2/'):
             os.mkdir(newpath + 'bowtie2/')
+        if not os.path.exists(newpath + 'bowtie2/spikeins/'):
+            os.mkdir(newpath + 'bowtie2/spikeins/')
         for i in range(len(SpikeIngenomes)):
             print "Checking reads mapped to: " + SpikeInbowtieindexes[i].split('/')[-1]
             g = SpikeIngenomes[i]
