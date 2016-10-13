@@ -120,7 +120,7 @@ def run():
             check_job.run(job,tempdir)
         for file1 in [i for i in os.listdir(newpath + 'bowtie2/spikeins/') if '.stderr' in i]:
             print file1.split('.')[2]
-            with open(file1) as F:
+            with open(newpath + 'bowtie2/spikeins/' + file1) as F:
                 for line in F:
                     print line
 
