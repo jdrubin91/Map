@@ -48,6 +48,9 @@ SpikeInbowtieindexes=['/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-1','
 # bowtieoptions = "-p32 -k 1 -n 2 -l 36 --best"
 bowtieoptions = "-p32 --very-sensitive"
 
+#Check read quality?
+quality=False
+
 #Flip reads? This is used for some GRO-Seq protocols
 flip = False
 
@@ -89,9 +92,10 @@ def run():
         print "No SRA files in filepath"
     
     #Checks read quality
-    print "done\nChecking quality..."
-    quality_check.run(scriptdir, fullpath, tempdir)
-    check_job.run(job,tempdir)
+    if quality:
+        print "done\nChecking quality..."
+        quality_check.run(scriptdir, fullpath, tempdir)
+        check_job.run(job,tempdir)
     
     #Flips reads (use for some GRO-Seq protocols)
     if flip:
