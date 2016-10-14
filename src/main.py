@@ -22,10 +22,10 @@ import millions_mapped
 
 #User-defined input
 #======================================================================
-#Give full path to SRA files (remember to include a '/' at the end)
+#Give full path to SRA files or FASTQ files (remember to include a '/' at the end)
 fullpath = sys.argv[1]
 
-#Give full path to desired genome construct
+#Give full path to desired genome construct. Genome files contain two tab separated columns: Chromosome, Length of chromosome
 genome='/projects/dowellLab/groseq/forJoey/human.hg19.genome'
 #genome='/projects/dowellLab/groseq/forJoey/dro/dm3.fa.genome'
 #genome='/projects/dowellLab/groseq/forJoey/mm10.genome'
@@ -33,8 +33,12 @@ genome='/projects/dowellLab/groseq/forJoey/human.hg19.genome'
 #Path to spike-in control genomes
 SpikeIngenomes=['/projects/Down/Dowellseq/genomes/LBS-1.genome','/projects/Down/Dowellseq/genomes/A-region.genome','/projects/Down/Dowellseq/genomes/LBS-3.genome','/projects/Down/Dowellseq/genomes/C-unit.genome','/projects/Down/Dowellseq/genomes/TRNAS23.genome']
 
+#Give full path to bowtie indexes, these can be created with bowtie and a fasta file of your genome using the command:
+#bowtie2-build genomefasta.fa basename
+#genomefasta.fa - fasta file of entire genome
+#basename - base filename given to bowtie index files
+#Give full path to bowtie indexes with basename at end
 
-#Give full path to bowtie indexes, these can be created with bowtie and a fasta file of your genome
 bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/hg19_Bowtie2_indexp32'
 #bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/mm10_Bowtie2_index'
 #bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/dm3.fa.Bowtie2'
@@ -45,7 +49,9 @@ SpikeInbowtieindexes=['/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-1','
 
 
 #Specify bowtie options
+#Used for ChIP-Seq
 # bowtieoptions = "-p32 -k 1 -n 2 -l 36 --best"
+#Used for GRO-Seq
 bowtieoptions = "-p32 --very-sensitive"
 
 #Check read quality?
@@ -105,6 +111,7 @@ def run():
     else:
         newpath = fullpath
     
+    #Checks reads mapped to spike-in control genomes
     if spike:
         print "done\nChecking Spike-in Controls..."
         if not os.path.exists(newpath + 'bowtie2/'):
@@ -119,7 +126,7 @@ def run():
             fastq_to_sam.run(scriptdir, newpath, tempdir, g, boolean=False)
             check_job.run(job,tempdir)
         for file1 in [i for i in os.listdir(newpath + 'bowtie2/spikeins/') if '.stderr' in i]:
-            print file1.split('.')[2]
+            print file1.split('.')[0] + file1.split('.')[2]
             with open(newpath + 'bowtie2/spikeins/' + file1) as F:
                 for line in F:
                     print line
