@@ -10,10 +10,11 @@ def run(scriptdir, fullpath, tempdir):
     if boolean:
         outfile = open(scriptdir + '/runsradump.sh', 'w')
         outfile.write("indir=" + fullpath + "\n")
+        outfile.write("od=" + fullpath + "\n")
         outfile.write("for pathandfilename in `ls $indir*.sra`; do\n")
         outfile.write("entry=`basename $pathandfilename .sra`\n")
         outfile.write("infilename=$pathandfilename\n")
-        outfile.write("qsub -v infile=$infilename -N sradump${entry} " + scriptdir + "/sradump.sh\n")
+        outfile.write("qsub -v infile=$infilename,outdir=$od -N sradump${entry} " + scriptdir + "/sradump.sh\n")
         outfile.write("done")
         outfile.close()
         

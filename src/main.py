@@ -53,15 +53,17 @@ SpikeInbowtieindexes=['/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-1','
 # bowtieoptions = "-p32 -k 1 -n 2 -l 36 --best"
 #Used for GRO-Seq
 bowtieoptions = "-p32 --very-sensitive"
+#Used for ATAC-Seq
+bowtieoptions = "-X2000"
 
 #Check read quality?
-quality=False
+quality=True
 
 #Flip reads? This is used for some GRO-Seq protocols
 flip = False
 
 #Check for Spike-In controls? Only True if you added spike-in controls from Jonathan Rubin to your GRO-Seq samples
-spike= True
+spike= False
 #======================================================================
 
 
