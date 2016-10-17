@@ -25,5 +25,5 @@ echo Working directory is $PBS_O_WORKDIR
 #PBS -V
 
 ### fastq-dump $infile
-/opt/sra/2.3.2-5/bin/fastq-dump $infile
+/opt/sra/2.3.2-5/bin/fastq-dump -O $outdir $infile
 
