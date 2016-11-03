@@ -18,6 +18,6 @@ def run(scriptdir, fullpath, tempdir):
         outfile.write("done")
         outfile.close()
         
-        os.system("bash " + scriptdir + "/runsradump.sh")
+        os.system("bash " + scriptdir + "/runsradump.sh > " + tempdir + "/Job_ID.txt")
     
     return boolean
