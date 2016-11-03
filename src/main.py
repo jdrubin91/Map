@@ -52,9 +52,11 @@ SpikeInbowtieindexes=['/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-1','
 #Used for ChIP-Seq
 # bowtieoptions = "-p32 -k 1 -n 2 -l 36 --best"
 #Used for GRO-Seq
-bowtieoptions = "-p32 --very-sensitive"
+#bowtieoptions = "-p32 --very-sensitive"
 #Used for ATAC-Seq
-bowtieoptions = "-X2000"
+#bowtieoptions = "-X2000"
+#Used for RNAPII-ChIP
+bowtieoptions = "-n 1 -m 1-best-strata"
 
 #Check read quality?
 quality=True
