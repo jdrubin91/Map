@@ -1,7 +1,7 @@
 
 #PBS -q long8gb 
 #PBS -V
-#PBS -l pmem=64gb
+#PBS -l pmem=32gb
 #PBS -l walltime=96:00:00
 #PBS -lnodes=1:ppn=1
 ### Use the bourne shell
