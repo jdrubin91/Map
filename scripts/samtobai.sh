@@ -1,5 +1,5 @@
 
-#PBS -q longmem 
+#PBS -q long8gb 
 #PBS -V
 #PBS -l pmem=100gb
 #PBS -l walltime=96:00:00
