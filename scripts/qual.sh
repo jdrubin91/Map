@@ -1,4 +1,4 @@
-#PBS -q longmem
+#PBS -q long8gb
 #PBS -S /bin/sh
 #PBS -l nodes=1:ppn=1
 #PBS -e /projects/dowellLab/groseq/pubgro/o_and_e/
