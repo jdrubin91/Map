@@ -4,6 +4,7 @@ __author__ = 'Jonathan Rubin'
 #Required modules: 
 #module load sra_2.3.2-5
 #module load samtools_0.1.19
+#module load bedtools2_2.22.0
 
 import sys
 import os
@@ -35,8 +36,8 @@ SpikeIngenomes=['/projects/Down/Dowellseq/genomes/LBS-1.genome','/projects/Down/
 
 #Give full path to bowtie indexes, these can be created with bowtie and a fasta file of your genome using the command:
 #bowtie2-build genomefasta.fa basename
-#genomefasta.fa - fasta file of entire genome
-#basename - base filename given to bowtie index files
+#genomefasta.fa = fasta file of entire genome
+#basename = base filename given to bowtie index files
 #Give full path to bowtie indexes with basename at end
 
 bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/hg19_Bowtie2_indexp32'
@@ -50,9 +51,9 @@ SpikeInbowtieindexes=['/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-1','
 
 #Specify bowtie options
 #Used for ChIP-Seq
-# bowtieoptions = "-p32 -k 1 -n 2 -l 36 --best"
+# bowtieoptions = "-k 1 -n 2 -l 36 --best"
 #Used for GRO-Seq
-#bowtieoptions = "-p32 --very-sensitive"
+#bowtieoptions = "--very-sensitive"
 #Used for ATAC-Seq
 #bowtieoptions = "-X2000"
 #Used for RNAPII-ChIP

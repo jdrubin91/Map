@@ -55,7 +55,7 @@ def run(scriptdir,genome, bowtieindex, bowtieoptions):
     outfile2.write("#PBS -V\n")
     outfile2.write("echo $fastq1pathandfile\n")
     outfile2.write("echo ${outdir}${outfile}.sam\n")
-    outfile2.write("/opt/bowtie/bowtie2-2.0.2/bowtie2 " + bowtieoptions + " \\\n")
+    outfile2.write("/opt/bowtie/bowtie2-2.0.2/bowtie2 -p32 " + bowtieoptions + " \\\n")
     outfile2.write(bowtieindex + " \\\n")
     outfile2.write("-U $fastq1pathandfile \\\n")
     outfile2.write("> ${outdir}${outfile}.sam \\\n")
