@@ -26,6 +26,9 @@ import millions_mapped
 #Give full path to SRA files or FASTQ files (remember to include a '/' at the end)
 fullpath = sys.argv[1]
 
+#Give email address where job e-mails will be sent
+email="joru1876@colorado.edu"
+
 #Give full path to desired genome construct. Genome files contain two tab separated columns: Chromosome, Length of chromosome
 genome='/projects/dowellLab/groseq/forJoey/human.hg19.genome'
 #genome='/projects/dowellLab/groseq/forJoey/dro/dm3.fa.genome'
@@ -140,7 +143,7 @@ def run():
 
     #Writes script files based on genome and bowtie index
     print "done\nWriting script files..."
-    write_scripts.run(scriptdir,genome,bowtieindex,bowtieoptions)
+    write_scripts.run(scriptdir,genome,bowtieindex,bowtieoptions,email)
 
     #Converts Fastq to SAM format
     print "done\nConverting Fastq to SAM..."

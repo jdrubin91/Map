@@ -2,7 +2,7 @@ __author__ = 'Jonathan Rubin'
 
 import os
 
-def run(scriptdir,genome, bowtieindex, bowtieoptions):
+def run(scriptdir,genome, bowtieindex, bowtieoptions, email):
     outfile = open(scriptdir + '/bam_to_5primebed.sh', 'w')
     outfile.write("### Run in desired queue\n")
     outfile.write("#PBS -q long8gb\n")
@@ -14,7 +14,7 @@ def run(scriptdir,genome, bowtieindex, bowtieoptions):
     outfile.write("#PBS -e /projects/dowellLab/groseq/pubgro/e_and_o/\n")
     outfile.write("### Set your email address\n")
     outfile.write("#PBS -m ae\n")
-    outfile.write("#PBS -M joru1876@colorado.edu\n")
+    outfile.write("#PBS -M " + email + "\n")
     outfile.write("### Switch to the working directory; by default TORQUE launches processes\n")
     outfile.write("### from your home directory.  This is a good idea because your -o and -e files\n")
     outfile.write("### will go here\n")
@@ -45,7 +45,7 @@ def run(scriptdir,genome, bowtieindex, bowtieoptions):
     outfile2.write("#PBS -l nodes=1:ppn=32\n")
     outfile2.write("### Set your email address\n")
     outfile2.write("#PBS -m ae\n")
-    outfile2.write("#PBS -M joru1876@colorado.edu\n")
+    outfile2.write("#PBS -M " + email + "\n")
     outfile2.write("### Switch to the working directory; by default TORQUE launches processes\n")
     outfile2.write("### from your home directory.  This is a good idea because your -o and -e files\n")
     outfile2.write("### will go here\n")
