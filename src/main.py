@@ -5,9 +5,12 @@ __author__ = 'Jonathan Rubin'
 #module load sra_2.3.2-5
 #module load samtools_0.1.19
 #module load bedtools2_2.22.0
+#Also need to git clone TrimGalore if using trim module into Map/ directory:
+#git clone https://github.com/FelixKrueger/TrimGalore.git
 
 import sys
 import os
+import trim
 import write_scripts
 import sra_to_fastq
 import check_job
@@ -41,8 +44,8 @@ SpikeIngenomes=['/projects/Down/Dowellseq/genomes/LBS-1.genome','/projects/Down/
 #bowtie2-build genomefasta.fa basename
 #genomefasta.fa = fasta file of entire genome
 #basename = base filename given to bowtie index files
-#Give full path to bowtie indexes with basename at end
 
+#Give full path to bowtie indexes with basename at end
 bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/hg19_Bowtie2_indexp32'
 #bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/mm10_Bowtie2_index'
 #bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/dm3.fa.Bowtie2'
@@ -56,11 +59,14 @@ SpikeInbowtieindexes=['/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-1','
 #Used for ChIP-Seq
 # bowtieoptions = "-k 1 -n 2 -l 36 --best"
 #Used for GRO-Seq
-#bowtieoptions = "--very-sensitive"
+bowtieoptions = "--very-sensitive"
 #Used for ATAC-Seq
 #bowtieoptions = "-X2000"
 #Used for RNAPII-ChIP
-bowtieoptions = "-n 1 -m 1-best-strata"
+# bowtieoptions = "-n 1 -m 1-best-strata"
+
+#Trim adaptors?
+trim = True
 
 #Check read quality?
 quality=True
@@ -92,32 +98,38 @@ tempdir = parent_dir(homedir) + '/temp'
 #Directory to temporary job file
 job = tempdir + "/Job_ID.txt"
 
+#Trim Galore directory
+trimdir = parent_dir(homedir) + '/TrimGalore/'
+
 
 def run():
     print "Filepath: ", fullpath
+    newpath = fullpath
     
     #Converts SRA to Fastq format
     print "Converting SRA to Fastq..."
-    boolean = sra_to_fastq.run(scriptdir, fullpath, tempdir)
+    boolean = sra_to_fastq.run(scriptdir, newpath, tempdir)
     if boolean:
         check_job.run(job,tempdir)
         print "done"
     else:
         print "No SRA files in filepath"
+
+    #Trim adaptor sequences from fastq files
+    if trim:
+        newpath = trim.run(trimdir,newpath)
     
     #Checks read quality
     if quality:
         print "done\nChecking quality..."
-        quality_check.run(scriptdir, fullpath, tempdir)
+        quality_check.run(scriptdir, newpath, tempdir)
         check_job.run(job,tempdir)
     
     #Flips reads (use for some GRO-Seq protocols)
     if flip:
         print "done\nFlipping Reads..."
-        newpath = flip_reads.run(scriptdir, fullpath, tempdir)
+        newpath = flip_reads.run(scriptdir, newpath, tempdir)
         check_job.run(job,tempdir)
-    else:
-        newpath = fullpath
     
     #Checks reads mapped to spike-in control genomes
     if spike:
