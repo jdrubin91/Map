@@ -12,10 +12,10 @@ def run(job,tempdir):
     boolean = True
     print "Checking jobs..."
     while boolean:
-        print "Still Running..."
+        print "/r","Still Running...",
         time.sleep(10)
         for item in ID:
-            os.system("qstat " + item + " > " + tempdir + "/" + item + "_status.txt")
+            os.system("qstat " + item + " &> " + tempdir + "/" + item + "_status.txt")
         status = list()
         for statusfile in [i for i in os.listdir(tempdir) if "_status.txt" in i]:
             with open(tempdir + "/" + statusfile) as F:
