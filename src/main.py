@@ -10,7 +10,7 @@ __author__ = 'Jonathan Rubin'
 
 import sys
 import os
-import trim
+import trim_galore
 import write_scripts
 import sra_to_fastq
 import check_job
@@ -117,7 +117,7 @@ def run():
 
     #Trim adaptor sequences from fastq files
     if trim:
-        newpath = trim.run(trimdir,newpath)
+        newpath = trim_galore.run(trimdir,newpath)
     
     #Checks read quality
     if quality:
