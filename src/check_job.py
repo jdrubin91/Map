@@ -12,11 +12,6 @@ def run(job,tempdir):
     boolean = True
     print "Checking jobs..."
     while boolean:
-        for x in range (0,3):  
-            b = "Still Running" + "." * x
-            print "/r", b
-            time.sleep(1)
-        time.sleep(7)
         for item in ID:
             os.system("qstat " + item + " &> " + tempdir + "/" + item + "_status.txt")
         status = list()
@@ -28,3 +23,10 @@ def run(job,tempdir):
                 status.append(i)
             os.system("rm " + tempdir + "/" + statusfile)
         boolean = sum(status) > 0
+        if boolean:
+            for x in range (0,3):  
+                b = str(len(ID) - sum([1 for i in status if i>0])) + " Job(s) Still Running" + "." * x
+                print "/r", b
+                time.sleep(1)
+            time.sleep(7)
+        
