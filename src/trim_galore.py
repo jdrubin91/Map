@@ -4,4 +4,7 @@ import os
 
 def run(trimdir,newpath):
     for file1 in os.listdir(newpath):
-        os.system(trimdir + "trim_galore " + newpath + file1)
+        output = newpath + 'trimmed/'
+        os.system(trimdir + "trim_galore - o " + output + " " + newpath + file1)
+
+    return output
