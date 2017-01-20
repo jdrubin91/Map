@@ -2,9 +2,9 @@ __author__ = 'Jonathan Rubin'
 
 import os
 
-def run(scriptdir, fullpath, tempdir):
+def run(scriptdir, newpath, tempdir):
     outfile = open(scriptdir + '/runqual.sh', 'w')
-    outfile.write("id=" + fullpath + "\n")
+    outfile.write("id=" + newpath + "\n")
     outfile.write("for pathandfilename in `ls $id*.fastq`; do\n")
     outfile.write("entry=`basename $pathandfilename`\n")
     outfile.write("qsub -v filename=$entry,indir=$id -N ${fn1}qual " + scriptdir + "/qual.sh\n")
