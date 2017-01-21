@@ -34,7 +34,7 @@ def run(job,tempdir):
             for x in range (0,3):
                 b = str(len(ID) - sum([1 for i in status if i>0])) + " Job(s) Still Running" + "." * x
                 #"/r" moves cursor to beginning
-                print "\r",b,
+                print (b, end="\r")
                 time.sleep(1)
             time.sleep(7)
         
