@@ -184,7 +184,7 @@ def run():
     
     #Creates IGV scripts 
     print "done\nCreating IGV files..."
-    igv_create.run(scriptdir, newpath)
+    igv_create.run(scriptdir, newpath, genome)
     
     
     print "done\nGetting millions mapped reads..."
