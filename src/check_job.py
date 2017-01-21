@@ -28,6 +28,7 @@ def run(job,tempdir):
                 status.append(i)
             os.system("rm " + tempdir + "/" + statusfile)
         boolean = sum(status) > 0
+        print boolean
         #If there are still jobs running, print statement, then wait to check jobs again
         if boolean:
             #Clears line
