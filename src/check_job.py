@@ -34,7 +34,7 @@ def run(job,tempdir):
             sys.stdout.write("\033[K")
             #Prints x Job(s) Still Running...
             for x in range (4):
-                b = str(len(ID) - sum([1 for i in status if i>0])) + " Job(s) Still Running" + "." * x
+                b = str(sum([1 for i in status if i>0])) + " Job(s) Still Running" + "." * x
                 #"/r" moves cursor to beginning
                 print "\r",b,
                 sys.stdout.flush()
