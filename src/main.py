@@ -35,8 +35,8 @@ email="joru1876@colorado.edu"
 
 #Specify genome
 genome = 'hg19'
-genome = 'dm3'
-genome = 'mm10'
+#genome = 'dm3'
+#genome = 'mm10'
 
 #Specify bowtie options
 #Used for ChIP-Seq
@@ -127,7 +127,7 @@ def run():
     
     #Checks read quality
     if quality:
-        print "done\nChecking quality..."
+        print "Checking quality..."
         quality_check.run(scriptdir, newpath, tempdir)
         check_job.run(job,tempdir)
     
