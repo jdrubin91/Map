@@ -49,13 +49,13 @@ bowtieoptions = "--very-sensitive"
 # bowtieoptions = "-n 1 -m 1-best-strata"
 
 #Trim adaptors?
-trim = True
+trim = False
 
 #Check read quality?
 quality=True
 
 #Flip reads? This is used for some GRO-Seq protocols
-flip = False
+flip = True
 
 #Check for Spike-In controls? Only True if you added spike-in controls from Jonathan Rubin to your GRO-Seq samples
 spike= False
