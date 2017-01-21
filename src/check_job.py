@@ -31,7 +31,7 @@ def run(job,tempdir):
         #If there are still jobs running, print statement, then wait to check jobs again
         if boolean:
             #Clears previous print statement
-            print "\r"
+            print "\r",
             sys.stdout.write("\033[K")
             #Prints x Job(s) Still Running...
             for x in range (4):
