@@ -2,7 +2,7 @@ __author__ = 'Jonathan Rubin'
 
 import os
 
-def run(scriptdir,genome, bowtieindex, bowtieoptions, email):
+def run(scriptdir, genomedir, bowtieindex, bowtieoptions, email):
     outfile = open(scriptdir + '/bam_to_5primebed.sh', 'w')
     outfile.write("### Run in desired queue\n")
     outfile.write("#PBS -q long8gb\n")
@@ -22,7 +22,7 @@ def run(scriptdir,genome, bowtieindex, bowtieoptions, email):
     outfile.write("echo Working directory is $PBS_O_WORKDIR\n")
     outfile.write("### Retrieve/use all modules loaded ###\n")
     outfile.write("#PBS -V\n")
-    outfile.write("genome=" + genome + "\n")
+    outfile.write("genome=" + genomedir + "\n")
     outfile.write("echo $infile\n")
     outfile.write("echo $genome\n")
     outfile.write("echo $outfile1\n")

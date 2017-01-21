@@ -33,28 +33,10 @@ fullpath = sys.argv[1]
 #Give email address where job e-mails will be sent
 email="joru1876@colorado.edu"
 
-#Give full path to desired genome construct. Genome files contain two tab separated columns: Chromosome, Length of chromosome
-genome='/projects/dowellLab/groseq/forJoey/human.hg19.genome'
-#genome='/projects/dowellLab/groseq/forJoey/dro/dm3.fa.genome'
-#genome='/projects/dowellLab/groseq/forJoey/mm10.genome'
-
-#Path to spike-in control genomes
-SpikeIngenomes=['/projects/Down/Dowellseq/genomes/LBS-1.genome','/projects/Down/Dowellseq/genomes/A-region.genome','/projects/Down/Dowellseq/genomes/LBS-3.genome','/projects/Down/Dowellseq/genomes/C-unit.genome','/projects/Down/Dowellseq/genomes/TRNAS23.genome']
-
-#Give full path to bowtie indexes, these can be created with bowtie and a fasta file of your genome using the command:
-#bowtie2-build genomefasta.fa basename
-#genomefasta.fa = fasta file of entire genome
-#basename = base filename given to bowtie index files
-
-#Give full path to bowtie indexes with basename at end
-bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/hg19_Bowtie2_indexp32'
-#bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/mm10_Bowtie2_index'
-#bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/dm3.fa.Bowtie2'
-#bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/ERCC92_Bowtie2_index'
-
-#Path to spike-in control bowtie indexes
-SpikeInbowtieindexes=['/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-1','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/A-region','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-3','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/C-unit','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/TRNAS23']
-
+#Specify genome
+genome = 'hg19'
+genome = 'dm3'
+genome = 'mm10'
 
 #Specify bowtie options
 #Used for ChIP-Seq
@@ -79,13 +61,36 @@ flip = False
 spike= False
 #======================================================================
 
-
 #Return parent directory
 def parent_dir(directory):
     pathlist = directory.split('/')
     newdir = '/'.join(pathlist[0:len(pathlist)-1])
     
     return newdir
+
+#Full path to genome construct and bowtie indexes. Genome files contain two tab separated columns: Chromosome, Length of chromosome.
+#Bowtie indexes can be created with bowtie and a fasta file of your genome using the command:
+#bowtie2-build genomefasta.fa basename
+#genomefasta.fa = fasta file of entire genome
+#basename = base filename given to bowtie index files
+if genome == 'hg19':
+    genomedir='/projects/dowellLab/groseq/forJoey/human.hg19.genome'
+    bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/hg19_Bowtie2_indexp32'
+elif genome == 'dm3':
+    genomedir='/projects/dowellLab/groseq/forJoey/dro/dm3.fa.genome'
+    bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/dm3.fa.Bowtie2'
+elif genome == 'mm10':
+    genomedir='/projects/dowellLab/groseq/forJoey/mm10.genome'
+    bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/mm10_Bowtie2_index'
+else:
+    print "Genome not found"
+
+#Path to spike-in control genomes
+SpikeIngenomes=['/projects/Down/Dowellseq/genomes/LBS-1.genome','/projects/Down/Dowellseq/genomes/A-region.genome','/projects/Down/Dowellseq/genomes/LBS-3.genome','/projects/Down/Dowellseq/genomes/C-unit.genome','/projects/Down/Dowellseq/genomes/TRNAS23.genome']
+
+#Path to spike-in control bowtie indexes
+SpikeInbowtieindexes=['/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-1','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/A-region','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-3','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/C-unit','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/TRNAS23']
+#bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/ERCC92_Bowtie2_index'
 
 #Home directory
 homedir = os.path.dirname(os.path.realpath(__file__))
@@ -156,11 +161,11 @@ def run():
 
     #Writes script files based on genome and bowtie index
     print "done\nWriting script files..."
-    write_scripts.run(scriptdir,genome,bowtieindex,bowtieoptions,email)
+    write_scripts.run(scriptdir,genomedir,bowtieindex,bowtieoptions,email)
 
     #Converts Fastq to SAM format
     print "done\nConverting Fastq to SAM..."
-    newpath = fastq_to_sam.run(scriptdir, newpath, tempdir, genome)
+    newpath = fastq_to_sam.run(scriptdir, newpath, tempdir, genomedir)
     check_job.run(job,tempdir)
     
     #Converts SAM to BAM format
