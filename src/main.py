@@ -1,7 +1,12 @@
 __author__ = 'Jonathan Rubin'
 #Scripts adapted from Josephina Hendrix and Mary Allen
 
-#Need to git clone TrimGalore if using trim module into Map/ directory:
+#Required modules:
+#module load cutadapt_1.2.1
+#module load sra_2.3.2-5
+#module load samtools_0.1.19
+#module load bedtools2_2.22.0
+#Also need to git clone TrimGalore if using trim module into Map/ directory:
 #git clone https://github.com/FelixKrueger/TrimGalore.git
 
 import sys
