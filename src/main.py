@@ -106,10 +106,6 @@ trimdir = parent_dir(homedir) + '/TrimGalore/'
 def run():
     print "Filepath: ", fullpath
     newpath = fullpath
-
-    print "Loading Modules..."
-    os.system("bash " + scriptdir + "/load_modules.sh")
-    print "done"
     
     #Converts SRA to Fastq format
     print "Converting SRA to Fastq..."
