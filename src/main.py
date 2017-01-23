@@ -1,12 +1,7 @@
 __author__ = 'Jonathan Rubin'
 #Scripts adapted from Josephina Hendrix and Mary Allen
 
-#Required modules:
-#module load cutadapt_1.2.1
-#module load sra_2.3.2-5
-#module load samtools_0.1.19
-#module load bedtools2_2.22.0
-#Also need to git clone TrimGalore if using trim module into Map/ directory:
+#Need to git clone TrimGalore if using trim module into Map/ directory:
 #git clone https://github.com/FelixKrueger/TrimGalore.git
 
 import sys
@@ -34,9 +29,9 @@ fullpath = sys.argv[1]
 email="joru1876@colorado.edu"
 
 #Specify genome
-genome = 'hg19'
+# genome = 'hg19'
 #genome = 'dm3'
-#genome = 'mm10'
+genome = 'mm10'
 
 #Specify bowtie options
 #Used for ChIP-Seq
@@ -49,7 +44,7 @@ bowtieoptions = "--very-sensitive"
 # bowtieoptions = "-n 1 -m 1-best-strata"
 
 #Trim adaptors?
-trim = False
+trim = True
 
 #Check read quality?
 quality=True
@@ -83,7 +78,7 @@ elif genome == 'mm10':
     genomedir='/projects/dowellLab/groseq/forJoey/mm10.genome'
     bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/mm10_Bowtie2_index'
 else:
-    print "Genome not found"
+    sys.exit("Genome not found, exiting...")
 
 #Path to spike-in control genomes
 SpikeIngenomes=['/projects/Down/Dowellseq/genomes/LBS-1.genome','/projects/Down/Dowellseq/genomes/A-region.genome','/projects/Down/Dowellseq/genomes/LBS-3.genome','/projects/Down/Dowellseq/genomes/C-unit.genome','/projects/Down/Dowellseq/genomes/TRNAS23.genome']
@@ -111,6 +106,10 @@ trimdir = parent_dir(homedir) + '/TrimGalore/'
 def run():
     print "Filepath: ", fullpath
     newpath = fullpath
+
+    print "Loading Modules..."
+    os.system("bash " + scriptdir + "/load_modules.sh")
+    print "done"
     
     #Converts SRA to Fastq format
     print "Converting SRA to Fastq..."
