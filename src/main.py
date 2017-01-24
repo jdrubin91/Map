@@ -50,6 +50,9 @@ bowtieoptions = "--very-sensitive"
 
 #Trim adaptors?
 trim = True
+#If no options desired use "" else needs a space at the end.
+# trimoptions = ""
+trimoptions = "--clip_R1 15 "
 
 #Check read quality?
 quality=True
@@ -123,7 +126,7 @@ def run():
 
     #Trim adaptor sequences from fastq files
     if trim:
-        newpath = trim_galore.run(trimdir,newpath)
+        newpath = trim_galore.run(trimdir,trimoptions,newpath)
     
     #Checks read quality
     if quality:
