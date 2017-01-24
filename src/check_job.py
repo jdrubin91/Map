@@ -41,4 +41,7 @@ def run(job,tempdir):
                     print "\r",b,
                     sys.stdout.flush()
                     time.sleep(1)
+                    
+    print "\r",
+    sys.stdout.write("\033[K")
         
