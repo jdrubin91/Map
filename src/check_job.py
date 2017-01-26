@@ -13,7 +13,6 @@ def run(job,tempdir):
             if 'pando' in line:
                 ID.append(line.strip())
     boolean = True
-    print "Checking jobs..."
     while boolean:
         #Check all job IDs using qstat. If job is done, status.txt will be empty
         for item in ID:

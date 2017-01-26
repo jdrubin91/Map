@@ -9,6 +9,6 @@ def run(trimdir,trimoptions,newpath):
             os.system(trimdir + "trim_galore -o " + output + " " + trimoptions + newpath + file1)
     for file1 in os.listdir(output):
         if 'fq' in file1.split('.')[-1]:
-            os.system("mv " + output + file1 + " " + output + file1.split('.')[:-1] + ".fastq")
+            os.system("mv " + output + file1 + " " + output + ".".join(file1.split('.')[:-1]) + ".fastq")
 
     return output
