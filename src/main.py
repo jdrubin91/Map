@@ -12,6 +12,7 @@ __author__ = 'Jonathan Rubin'
 import sys
 import os
 import trim_galore
+import trimmomatic
 import write_scripts
 import sra_to_fastq
 import check_job
@@ -49,10 +50,11 @@ bowtieoptions = "--very-sensitive"
 # bowtieoptions = "-n 1 -m 1-best-strata"
 
 #Trim adaptors?
-trim = True
+trimgalore = False
+trimmomatic = True
 #If no options desired use "" else needs a space at the end.
 # trimoptions = ""
-trimoptions = "--clip_R1 15 "
+trimgaloreoptions = "--clip_R1 15 "
 
 #Check read quality?
 quality=True
@@ -110,6 +112,9 @@ job = tempdir + "/Job_ID.txt"
 #Trim Galore directory
 trimdir = parent_dir(homedir) + '/TrimGalore/'
 
+#Trimmomatic directory
+trimmomaticdir = parent_dir(homedir) + '/Trimmomatic-0.36/trimmomatic-0.36.jar'
+
 
 def run():
     print "Filepath: ", fullpath
@@ -125,8 +130,11 @@ def run():
         print "No SRA files in filepath"
 
     #Trim adaptor sequences from fastq files
-    if trim:
-        newpath = trim_galore.run(trimdir,trimoptions,newpath)
+    if trimgalore:
+        newpath = trim_galore.run(trimdir,trimgaloreoptions,newpath)
+    elif trimmomatic:
+        newpath = trimmomatic.run(trimmomaticdir,newpath)
+
     
     #Checks read quality
     if quality:
