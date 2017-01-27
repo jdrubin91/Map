@@ -51,7 +51,7 @@ bowtieoptions = "--very-sensitive"
 
 #Trim adaptors?
 trimgalore = False
-trimmomatic = True
+trimmomaticbool = True
 #If no options desired use "" else needs a space at the end.
 # trimoptions = ""
 trimgaloreoptions = "--clip_R1 15 "
@@ -132,7 +132,7 @@ def run():
     #Trim adaptor sequences from fastq files
     if trimgalore:
         newpath = trim_galore.run(trimdir,trimgaloreoptions,newpath)
-    elif trimmomatic:
+    elif trimmomaticbool:
         newpath = trimmomatic.run(trimmomaticdir,newpath)
 
     
