@@ -53,16 +53,16 @@ bowtieoptions = "--very-sensitive"
 
 #Trim adaptors?
 trimgalore = False
-trimmomaticbool = False
+trimmomaticbool = True
 #If no options desired use "" else needs a space at the end.
 # trimoptions = ""
 trimgaloreoptions = "--clip_R1 15 "
 
 #Check read quality?
-quality=False
+quality=True
 
 #Flip reads? This is used for some GRO-Seq protocols
-flip = False
+flip = True
 
 #Check for Spike-In controls? Only True if you added spike-in controls from Jonathan Rubin to your GRO-Seq samples
 spike= False
