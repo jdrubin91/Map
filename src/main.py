@@ -35,10 +35,10 @@ fullpath = sys.argv[1]
 email="joru1876@colorado.edu"
 
 #Specify genome
-# genome = 'hg19'
+genome = 'hg19'
 #genome = 'dm3'
 # genome = 'mm10'
-genome = 'ERCC'
+# genome = 'ERCC'
 
 #Specify bowtie options
 #Used for ChIP-Seq
