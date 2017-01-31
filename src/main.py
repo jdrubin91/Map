@@ -44,8 +44,8 @@ genome = 'ERCC'
 #Used for ChIP-Seq
 # bowtieoptions = "-k 1 -n 2 -l 36 --best"
 #Used for GRO-Seq
-# bowtieoptions = "--very-sensitive"
-bowtieoptions = "-p 4 -S"
+bowtieoptions = "--very-sensitive"
+# bowtieoptions = "-p 4 -S"
 #Used for ATAC-Seq
 #bowtieoptions = "-X2000"
 #Used for RNAPII-ChIP
