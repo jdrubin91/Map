@@ -37,7 +37,8 @@ email="joru1876@colorado.edu"
 #Specify genome
 # genome = 'hg19'
 #genome = 'dm3'
-genome = 'mm10'
+# genome = 'mm10'
+genome = 'ERCC'
 
 #Specify bowtie options
 #Used for ChIP-Seq
@@ -88,6 +89,9 @@ elif genome == 'dm3':
 elif genome == 'mm10':
     genomedir='/projects/dowellLab/groseq/forJoey/mm10.genome'
     bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/mm10_Bowtie2_index'
+elif genome == 'ERCC':
+    bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/ERCC92_Bowtie2_index'
+    genomedir='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/ERCC.genome'
 else:
     sys.exit("Genome not found, exiting...")
 
@@ -96,7 +100,7 @@ SpikeIngenomes=['/projects/Down/Dowellseq/genomes/LBS-1.genome','/projects/Down/
 
 #Path to spike-in control bowtie indexes
 SpikeInbowtieindexes=['/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-1','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/A-region','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-3','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/C-unit','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/TRNAS23']
-#bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/ERCC92_Bowtie2_index'
+
 
 #Home directory
 homedir = os.path.dirname(os.path.realpath(__file__))
