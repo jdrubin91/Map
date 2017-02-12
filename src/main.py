@@ -35,9 +35,9 @@ fullpath = sys.argv[1]
 email="joru1876@colorado.edu"
 
 #Specify genome
-# genome = 'hg19'
+genome = 'hg19'
 #genome = 'dm3'
-genome = 'mm10'
+# genome = 'mm10'
 # genome = 'ERCC'
 
 #Specify bowtie options
@@ -52,11 +52,11 @@ bowtieoptions = "--very-sensitive"
 # bowtieoptions = "-n 1 -m 1-best-strata"
 
 #Trim adaptors?
-trimgalore = False
-trimmomaticbool = True
+trimgalore = True
+trimmomaticbool = False
 #If no options desired use "" else needs a space at the end.
-# trimoptions = ""
-trimgaloreoptions = "--clip_R1 15 "
+trimgaloreoptions = ""
+# trimgaloreoptions = "--clip_R1 15 "
 
 #Check read quality?
 quality=True
@@ -65,7 +65,7 @@ quality=True
 flip = True
 
 #Check for Spike-In controls? Only True if you added spike-in controls from Jonathan Rubin to your GRO-Seq samples
-spike= False
+spike= True
 #======================================================================
 
 #Return parent directory
