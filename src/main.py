@@ -59,10 +59,10 @@ trimgaloreoptions = ""
 # trimgaloreoptions = "--clip_R1 15 "
 
 #Check read quality?
-quality=True
+quality=False
 
 #Flip reads? This is used for some GRO-Seq protocols
-flip = True
+flip = False
 
 #Check for Spike-In controls? Only True if you added spike-in controls from Jonathan Rubin to your GRO-Seq samples
 spike= True
@@ -164,7 +164,7 @@ def run():
             print "Checking reads mapped to: " + SpikeInbowtieindexes[i].split('/')[-1]
             g = SpikeIngenomes[i]
             b = SpikeInbowtieindexes[i]
-            write_scripts.run(scriptdir,g,b,bowtieoptions)
+            write_scripts.run(scriptdir,g,b,bowtieoptions,email)
             fastq_to_sam.run(scriptdir, newpath, tempdir, g, boolean=False)
             check_job.run(job,tempdir)
         for file1 in [i for i in os.listdir(newpath + 'bowtie2/spikeins/') if '.stderr' in i]:
