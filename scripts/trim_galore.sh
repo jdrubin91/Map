@@ -17,5 +17,6 @@ echo Working directory is $PBS_O_WORKDIR
 ### Retrieve/use all modules loaded ###
 #PBS -V
 
+module load cutadapt_1.2.1
 
 ${trimdir}trim_galore --path_to_cutadapt /opt/cutadapt/1.2.1/bin/cutadapt -o $outdir $infile
