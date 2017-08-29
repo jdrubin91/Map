@@ -18,4 +18,4 @@ echo Working directory is $PBS_O_WORKDIR
 #PBS -V
 
 
-${trimdir}trim_galore --path_to_cutadapt /opt/cutadapt/python-2.7.11/1.11/bin/cutadapt -o $outdir $infile
+${trimdir}trim_galore --path_to_cutadapt /opt/cutadapt/1.2.1/bin/cutadapt -o $outdir $infile
