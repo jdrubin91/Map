@@ -19,4 +19,7 @@ echo Working directory is $PBS_O_WORKDIR
 
 module load cutadapt_1.2.1
 
+echo $PATH
+echo $PYTHONPATH
+
 ${trimdir}trim_galore --path_to_cutadapt /opt/cutadapt/1.2.1/bin/cutadapt -o $outdir $infile
