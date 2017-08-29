@@ -22,10 +22,10 @@ def run_job(trimdir, scriptdir, newpath, tempdir):
     outfile.write("for pathandfilename in `ls $indir*.fastq`; do\n")
     outfile.write("entry=`basename $pathandfilename .fastq`\n")
     outfile.write("echo $entry\n")
-    outfile.write("qsub -v infile=$pathandfilename,outdir=$od -N ${ofile}trim " + scriptdir + "/trim_galore.sh\n")
+    outfile.write("qsub -v infile=$pathandfilename,outdir=$od -N ${entry}_trim " + scriptdir + "/trim_galore.sh\n")
     outfile.write("done")
     outfile.close()
     
     os.system("bash " + scriptdir + "/runtrimgalore.sh > " + tempdir + "/Job_ID.txt")
     
-    return fullpath + 'trimmed/'
+    return newpath + 'trimmed/'

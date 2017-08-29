@@ -11,3 +11,19 @@ def run(trimmomaticdir,newpath):
             os.system("java -jar " + trimmomaticdir + " SE " + newpath + file1 + " " + output + file1 + " MINLEN:36 CROP:50")
 
     return output
+
+def run_job(trimdir, scriptdir, newpath, tempdir):
+    outfile = open(scriptdir + '/runtrimmomatic.sh', 'w')
+    outfile.write("od=" + newpath + "trimmed/\n")
+    outfile.write("indir=" + newpath + "\n")
+    outfile.write("mkdir -p $od\n")
+    outfile.write("for pathandfilename in `ls $indir*.fastq`; do\n")
+    outfile.write("entry=`basename $pathandfilename .fastq`\n")
+    outfile.write("echo $entry\n")
+    outfile.write("qsub -v infile=$pathandfilename,outdir=$od${entry}.trimmed.fastq -N ${entry}_trim " + scriptdir + "/trimmomatic.sh\n")
+    outfile.write("done")
+    outfile.close()
+    
+    os.system("bash " + scriptdir + "/runtrimmomatic.sh > " + tempdir + "/Job_ID.txt")
+    
+    return newpath + 'trimmed/'
