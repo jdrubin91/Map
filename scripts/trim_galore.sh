@@ -1,8 +1,8 @@
 #PBS -q long8gb
 #PBS -S /bin/sh
 #PBS -l nodes=1:ppn=1
-#PBS -e /projects/dowellLab/groseq/pubgro/o_and_e/
-#PBS -o /projects/dowellLab/groseq/pubgro/o_and_e/
+#PBS -e /Users/joru1876/qsub_errors
+#PBS -o /Users/joru1876/qsub_stdo
 
 ### Set your email address
 #PBS -m ae
