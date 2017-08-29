@@ -1,5 +1,5 @@
 #PBS -q long8gb
-#PBS -S /bin/sh
+#PBS -S /bin/bash
 #PBS -l nodes=1:ppn=1
 #PBS -e /Users/joru1876/qsub_errors
 #PBS -o /Users/joru1876/qsub_stdo

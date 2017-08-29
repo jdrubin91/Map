@@ -22,7 +22,7 @@ def run_job(trimdir, scriptdir, newpath, tempdir):
     outfile.write("for pathandfilename in `ls $indir*.fastq`; do\n")
     outfile.write("entry=`basename $pathandfilename .fastq`\n")
     outfile.write("echo $entry\n")
-    outfile.write("qsub -v trimdir=" + trimdir + ",infile=$pathandfilename,outdir=$od -N ${entry}_trim " + scriptdir + "/trim_galore.sh\n")
+    outfile.write("qsub -V -v trimdir=" + trimdir + ",infile=$pathandfilename,outdir=$od -N ${entry}_trim " + scriptdir + "/trim_galore.sh\n")
     outfile.write("done")
     outfile.close()
     
