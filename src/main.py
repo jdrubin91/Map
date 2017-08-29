@@ -54,7 +54,7 @@ bowtieoptions = "--very-sensitive"
 #Trim adaptors?
 trimgalore = True
 trimmomaticbool = False
-#If no options desired use "" else needs a space at the end.
+#If no options desired use "" else needs a space at the end. This no longer works (JDR 8/22/17).
 trimgaloreoptions = ""
 # trimgaloreoptions = "--clip_R1 15 "
 
@@ -136,7 +136,10 @@ def run():
 
     #Trim adaptor sequences from fastq files
     if trimgalore:
-        newpath = trim_galore.run(trimdir,trimgaloreoptions,newpath)
+        print "Trimming reads..."
+        newpath = trim_galore.run_job(trimdir, scriptdir, newpath, tempdir)
+        check_job.run(job,tempdir)
+        # newpath = trim_galore.run(trimdir,trimoptions,newpath)
     elif trimmomaticbool:
         newpath = trimmomatic.run(trimmomaticdir,newpath)
 
