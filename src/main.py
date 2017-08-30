@@ -52,7 +52,7 @@ bowtieoptions = "--very-sensitive"
 # bowtieoptions = "-n 1 -m 1-best-strata"
 
 #Trim adaptors?
-trimgalore = True
+trimgalore = False
 trimmomaticbool = False
 #If no options desired use "" else needs a space at the end. This no longer works (JDR 8/22/17).
 trimgaloreoptions = ""
@@ -65,7 +65,18 @@ quality=False
 flip = False
 
 #Check for Spike-In controls? Only True if you added spike-in controls from Jonathan Rubin to your GRO-Seq samples
-spike= True
+spike= False
+
+#Booleans for all steps in pipeline (lets you only run part of the pipeline. If using this feature make sure above booleans are set appropriately
+#and you specify the correct path to input files. (JDR 8/30/17)
+sratofastq = False
+fastqtosam = False
+samtobam = False
+bamtobedgraph = True
+readcountcorrection = True
+igvcreate = True
+millionsmapped = True
+
 #======================================================================
 
 #Return parent directory
@@ -125,20 +136,24 @@ def run():
     print "Filepath: ", fullpath
     newpath = fullpath
     
-    #Converts SRA to Fastq format
-    print "Converting SRA to Fastq..."
-    boolean = sra_to_fastq.run(scriptdir, newpath, tempdir)
-    if boolean:
-        check_job.run(job,tempdir)
-        print "done"
-    else:
-        print "No SRA files in filepath"
+    if sratofastq:
+        #Converts SRA to Fastq format
+        print "Converting SRA to Fastq..."
+        boolean = sra_to_fastq.run(scriptdir, newpath, tempdir)
+        if boolean:
+            check_job.run(job,tempdir)
+            print "done"
+        else:
+            print "No SRA files in filepath"
 
     #Trim adaptor sequences from fastq files
     if trimgalore:
         print "Trimming reads..."
         newpath = trim_galore.run_job(trimdir, scriptdir, newpath, tempdir)
         check_job.run(job,tempdir)
+        for file1 in os.listdir(output):
+            if 'fq' in file1.split('.')[-1]:
+                os.system("mv " + output + file1 + " " + output + ".".join(file1.split('.')[:-1]) + ".fastq")
         # newpath = trim_galore.run(trimdir,trimoptions,newpath)
     elif trimmomaticbool:
         newpath = trimmomatic.run(trimmomaticdir,newpath)
@@ -182,32 +197,37 @@ def run():
     print "done\nWriting script files..."
     write_scripts.run(scriptdir,genomedir,bowtieindex,bowtieoptions,email)
 
-    #Converts Fastq to SAM format
-    print "done\nConverting Fastq to SAM..."
-    newpath = fastq_to_sam.run(scriptdir, newpath, tempdir, genomedir)
-    check_job.run(job,tempdir)
+    if fastqtosam:
+        #Converts Fastq to SAM format
+        print "done\nConverting Fastq to SAM..."
+        newpath = fastq_to_sam.run(scriptdir, newpath, tempdir, genomedir)
+        check_job.run(job,tempdir)
     
-    #Converts SAM to BAM format
-    print "done\nConverting SAM to BAM..."
-    newpath = sam_to_bam.run(scriptdir, newpath, tempdir)
-    check_job.run(job,tempdir)
+    if samtobam:
+        #Converts SAM to BAM format
+        print "done\nConverting SAM to BAM..."
+        newpath = sam_to_bam.run(scriptdir, newpath, tempdir)
+        check_job.run(job,tempdir)
     
-    #Converts BAM to Bedgraph format
-    print "done\nConverting BAM to Bedgraph..."
-    bam_to_bedgraph.run(scriptdir, newpath, tempdir)
-    check_job.run(job,tempdir)
+    if bamtobedgraph:
+        #Converts BAM to Bedgraph format
+        print "done\nConverting BAM to Bedgraph..."
+        bam_to_bedgraph.run(scriptdir, newpath, tempdir)
+        check_job.run(job,tempdir)
     
-    #Normalizes bedgraphs to millions mapped
-    print "done\nCorrecting for readcounts..."
-    readcount_correction.run(scriptdir, newpath)
+    if readcountcorrection:
+        #Normalizes bedgraphs to millions mapped
+        print "done\nCorrecting for readcounts..."
+        readcount_correction.run(scriptdir, newpath)
     
-    #Creates IGV scripts 
-    print "done\nCreating IGV files..."
-    igv_create.run(scriptdir, newpath, genome)
+    if igvcreate:
+        #Creates IGV scripts 
+        print "done\nCreating IGV files..."
+        igv_create.run(scriptdir, newpath, genome)
     
-    
-    print "done\nGetting millions mapped reads..."
-    millions_mapped.run(scriptdir, fullpath)
+    if millions_mapped:
+        print "done\nGetting millions mapped reads..."
+        millions_mapped.run(scriptdir, newpath)
     
     print "done"
     

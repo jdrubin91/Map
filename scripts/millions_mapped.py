@@ -4,10 +4,10 @@ import os
 import sys
 
 
-def main2(directory_of_paper):
-	save_path = directory_of_paper
-	directory_of_sortedbams = os.path.join(directory_of_paper, "flipped/bowtie2/sortedbam")
-	keyword = directory_of_paper.split("/")[-1]
+def main2(fullpath):
+	save_path = fullpath
+	directory_of_sortedbams = fullpath.split('sortedbam')[0]+'sortedbam'
+	keyword = fullpath.split("/")[-1]
 	completeName = os.path.join(save_path, "millions_mapped.txt")
 	file2 = open(completeName, "w")
 	file2.truncate()
