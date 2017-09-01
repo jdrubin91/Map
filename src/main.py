@@ -52,26 +52,26 @@ bowtieoptions = "--very-sensitive"
 # bowtieoptions = "-n 1 -m 1-best-strata"
 
 #Trim adaptors?
-trimgalore = False
+trimgalore = True
 trimmomaticbool = False
 #If no options desired use "" else needs a space at the end. This no longer works (JDR 8/22/17).
 trimgaloreoptions = ""
 # trimgaloreoptions = "--clip_R1 15 "
 
 #Check read quality?
-quality=False
+quality=True
 
 #Flip reads? This is used for some GRO-Seq protocols
-flip = False
+flip = True
 
 #Check for Spike-In controls? Only True if you added spike-in controls from Jonathan Rubin to your GRO-Seq samples
 spike= False
 
 #Booleans for all steps in pipeline (lets you only run part of the pipeline. If using this feature make sure above booleans are set appropriately
 #and you specify the correct path to input files. (JDR 8/30/17)
-sratofastq = False
-fastqtosam = False
-samtobam = False
+sratofastq = True
+fastqtosam = True
+samtobam = True
 bamtobedgraph = True
 readcountcorrection = True
 igvcreate = True
@@ -151,9 +151,9 @@ def run():
         print "Trimming reads..."
         newpath = trim_galore.run_job(trimdir, scriptdir, newpath, tempdir)
         check_job.run(job,tempdir)
-        for file1 in os.listdir(output):
+        for file1 in os.listdir(newpath):
             if 'fq' in file1.split('.')[-1]:
-                os.system("mv " + output + file1 + " " + output + ".".join(file1.split('.')[:-1]) + ".fastq")
+                os.system("mv " + newpath + file1 + " " + newpath + ".".join(file1.split('.')[:-1]) + ".fastq")
         # newpath = trim_galore.run(trimdir,trimoptions,newpath)
     elif trimmomaticbool:
         newpath = trimmomatic.run(trimmomaticdir,newpath)
