@@ -10,8 +10,8 @@ def run(job,tempdir):
     with open(job) as F:
         for line in F:
             #Append job names to list 'ID'
-            if 'pando' in line:
-                ID.append(line.strip())
+            if 'Submitted batch job' in line:
+                ID.append(line.strip('\n').split('\t')[-1])
     boolean = True
     while boolean:
         #Check all job IDs using qstat. If job is done, status.txt will be empty
