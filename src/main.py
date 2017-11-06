@@ -122,6 +122,8 @@ scriptdir = parent_dir(homedir) + '/scripts'
 #Temporary files directory
 tempdir = parent_dir(homedir) + '/temp'
 
+e_and_o = parent_dir(homedir) + '/e_and_o/'
+
 #Directory to temporary job file
 job = tempdir + "/Job_ID.txt"
 
@@ -136,11 +138,11 @@ def run():
     print "Filepath: ", fullpath
     newpath = fullpath
 
-    os.system("rm " + parent_dir(homedir) + "/e_and_o/*")
+    os.system("rm " + e_and_o + "*")
 
     #Writes script files based on genome and bowtie index
     print "Writing script files..."
-    write_scripts.run(scriptdir,genomedir,bowtieindex,bowtieoptions,email)
+    write_scripts.run(scriptdir,genomedir,bowtieindex,bowtieoptions,email,e_and_o)
     print "done"
     
     if sratofastq:
