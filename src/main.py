@@ -136,7 +136,7 @@ def run():
     print "Filepath: ", fullpath
     newpath = fullpath
 
-    os.system("rm " + homedir + "/e_and_o/*")
+    os.system("rm " + parent_dir(homedir) + "/e_and_o/*")
 
     #Writes script files based on genome and bowtie index
     print "Writing script files..."
