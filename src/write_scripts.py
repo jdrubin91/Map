@@ -64,7 +64,7 @@ def run(scriptdir, genomedir, bowtieindex, bowtieoptions, email):
     outfile.write("#SBATCH --workdir=$SLURM_SUBMIT_DIR\n")
     outfile.write("echo Working directory is $SLURM_SUBMIT_DIR\n")
     outfile.write("module load trim_galore/0.4.3\n")
-    outfile.write("${trimdir}trim_galore --path_to_cutadapt /opt/cutadapt/1.2.1/bin/cutadapt -o $outdir $infile\n")
+    outfile.write("${trimdir}trim_galore --path_to_cutadapt /opt/cutadapt/python-2.7.14/1.12/bin/cutadapt -o $outdir $infile\n")
     outfile.close()
 
     outfile = open(scriptdir + '/trimmomatic.sbatch','w')
