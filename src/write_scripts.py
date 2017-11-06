@@ -61,7 +61,6 @@ def run(scriptdir, genomedir, bowtieindex, bowtieoptions, email, e_and_o):
     outfile.write("#SBATCH --error " + e_and_o + "%x.err\n")
     outfile.write("#SBATCH --mail-type=ALL\n")
     outfile.write("#SBATCH --mail-user=" + email + "\n")
-    outfile.write("#SBATCH --workdir=$SLURM_SUBMIT_DIR\n")
     outfile.write("echo Working directory is $SLURM_SUBMIT_DIR\n")
     outfile.write("module load trim_galore/0.4.3\n")
     outfile.write("${trimdir}trim_galore --path_to_cutadapt /opt/cutadapt/python-2.7.14/1.12/bin/cutadapt -o $outdir $infile\n")
