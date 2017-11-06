@@ -21,6 +21,8 @@ def run_job(trimdir, scriptdir, newpath, tempdir):
     outfile.write("mkdir -p $od\n")
     outfile.write("for pathandfilename in `ls $indir*.fastq`; do\n")
     outfile.write("entry=`basename $pathandfilename .fastq`\n")
+    outfile.write("entry=${entry%\"}")
+    outfile.write("entry=${entry#\"}")
     outfile.write("echo $entry\n")
     outfile.write("sbatch -J ${entry}_trim --export=trimdir=" + trimdir + ",infile=$pathandfilename,outdir=$od " + scriptdir + "/trim_galore.sbatch\n")
     outfile.write("done")
