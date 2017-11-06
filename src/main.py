@@ -137,6 +137,11 @@ def run():
     newpath = fullpath
 
     os.system("rm " + homedir + "/e_and_o/*")
+
+    #Writes script files based on genome and bowtie index
+    print "Writing script files..."
+    write_scripts.run(scriptdir,genomedir,bowtieindex,bowtieoptions,email)
+    print "done"
     
     if sratofastq:
         #Converts SRA to Fastq format
@@ -150,15 +155,18 @@ def run():
 
     #Trim adaptor sequences from fastq files
     if trimgalore:
-        print "Trimming reads..."
+        print "Using trim galore to trim reads..."
         newpath = trim_galore.run_job(trimdir, scriptdir, newpath, tempdir)
         check_job.run(job,tempdir)
         for file1 in os.listdir(newpath):
             if 'fq' in file1.split('.')[-1]:
                 os.system("mv " + newpath + file1 + " " + newpath + ".".join(file1.split('.')[:-1]) + ".fastq")
         # newpath = trim_galore.run(trimdir,trimoptions,newpath)
+        print "done"
     elif trimmomaticbool:
+        print "Using trimmomatic to trim reads..."
         newpath = trimmomatic.run(trimmomaticdir,newpath)
+        print "done"
 
     
     #Checks read quality
@@ -166,16 +174,18 @@ def run():
         print "Checking quality..."
         quality_check.run(scriptdir, newpath, tempdir)
         check_job.run(job,tempdir)
+        print "done"
     
     #Flips reads (use for some GRO-Seq protocols)
     if flip:
-        print "done\nFlipping Reads..."
+        print "Flipping Reads..."
         newpath = flip_reads.run(scriptdir, newpath, tempdir)
         check_job.run(job,tempdir)
+        print "done"
     
     #Checks reads mapped to spike-in control genomes
     if spike:
-        print "done\nChecking Spike-in Controls..."
+        print "Checking Spike-in Controls..."
         if not os.path.exists(newpath + 'bowtie2/'):
             os.mkdir(newpath + 'bowtie2/')
         if not os.path.exists(newpath + 'bowtie2/spikeins/'):
@@ -192,46 +202,47 @@ def run():
             with open(newpath + 'bowtie2/spikeins/' + file1) as F:
                 for line in F:
                     print line
+        print "done"
 
 
-
-    #Writes script files based on genome and bowtie index
-    print "done\nWriting script files..."
-    write_scripts.run(scriptdir,genomedir,bowtieindex,bowtieoptions,email)
 
     if fastqtosam:
         #Converts Fastq to SAM format
-        print "done\nConverting Fastq to SAM..."
+        print "Converting Fastq to SAM..."
         newpath = fastq_to_sam.run(scriptdir, newpath, tempdir, genomedir)
         check_job.run(job,tempdir)
+        print "done"
     
     if samtobam:
         #Converts SAM to BAM format
-        print "done\nConverting SAM to BAM..."
+        print "Converting SAM to BAM..."
         newpath = sam_to_bam.run(scriptdir, newpath, tempdir)
         check_job.run(job,tempdir)
+        print "done"
     
     if bamtobedgraph:
         #Converts BAM to Bedgraph format
-        print "done\nConverting BAM to Bedgraph..."
+        print "Converting BAM to Bedgraph..."
         bam_to_bedgraph.run(scriptdir, newpath, tempdir)
         check_job.run(job,tempdir)
+        print "done"
     
     if readcountcorrection:
         #Normalizes bedgraphs to millions mapped
-        print "done\nCorrecting for readcounts..."
+        print "Correcting for readcounts..."
         readcount_correction.run(scriptdir, newpath)
+        print "done"
     
     if igvcreate:
         #Creates IGV scripts 
-        print "done\nCreating IGV files..."
+        print "Creating IGV files..."
         igv_create.run(scriptdir, newpath, genome)
+        print "done"
     
     if millions_mapped:
-        print "done\nGetting millions mapped reads..."
+        print "Getting millions mapped reads..."
         millions_mapped.run(scriptdir, newpath)
-    
-    print "done"
+        print "done"
     
     
     
