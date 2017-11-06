@@ -3,7 +3,7 @@ __author__ = 'Jonathan Rubin'
 import os
 
 def run(scriptdir, newpath, tempdir, genome, boolean=True):
-    outfile = open(scriptdir + '/runbowtiedir.sh', 'w')
+    outfile = open(scriptdir + '/runbowtiedir.sbatch', 'w')
     outfile.write("od=" + newpath + "bowtie2/\n")
     if not boolean:
         outfile.write("od=" + newpath + "bowtie2/spikeins/\n")
@@ -19,10 +19,10 @@ def run(scriptdir, newpath, tempdir, genome, boolean=True):
     outfile.write("ofile=${entry}.bowtie2\n")
     outfile.write("echo $ofile\n")
     outfile.write("echo ${odir}${ofile}.sam\n")
-    outfile.write("qsub -v fastq1pathandfile=$pathandfilename,outdir=$od,outfile=$ofile -N ${ofile}bowtiemap " + scriptdir + "/bowtieafastq.sh\n")
+    outfile.write("sbatch -v fastq1pathandfile=$pathandfilename,outdir=$od,outfile=$ofile -N ${ofile}bowtiemap " + scriptdir + "/bowtieafastq.sbatch\n")
     outfile.write("done")
     outfile.close()
     
-    os.system("bash " + scriptdir + "/runbowtiedir.sh > " + tempdir + "/Job_ID.txt")
+    os.system("bash " + scriptdir + "/runbowtiedir.sbatch > " + tempdir + "/Job_ID.txt")
     
     return newpath + 'bowtie2/'

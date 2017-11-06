@@ -15,17 +15,17 @@ def run(trimdir,trimoptions,newpath):
     return output
 
 def run_job(trimdir, scriptdir, newpath, tempdir):
-    outfile = open(scriptdir + '/runtrimgalore.sh', 'w')
+    outfile = open(scriptdir + '/runtrimgalore.sbatch', 'w')
     outfile.write("od=" + newpath + "trimmed/\n")
     outfile.write("indir=" + newpath + "\n")
     outfile.write("mkdir -p $od\n")
     outfile.write("for pathandfilename in `ls $indir*.fastq`; do\n")
     outfile.write("entry=`basename $pathandfilename .fastq`\n")
     outfile.write("echo $entry\n")
-    outfile.write("qsub -V -v trimdir=" + trimdir + ",infile=$pathandfilename,outdir=$od -N ${entry}_trim " + scriptdir + "/trim_galore.sh\n")
+    outfile.write("sbatch -V -v trimdir=" + trimdir + ",infile=$pathandfilename,outdir=$od -N ${entry}_trim " + scriptdir + "/trim_galore.sbatch\n")
     outfile.write("done")
     outfile.close()
     
-    os.system("bash " + scriptdir + "/runtrimgalore.sh > " + tempdir + "/Job_ID.txt")
+    os.system("bash " + scriptdir + "/runtrimgalore.sbatch > " + tempdir + "/Job_ID.txt")
     
     return newpath + 'trimmed/'

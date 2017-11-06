@@ -3,7 +3,7 @@ __author__ = 'Jonathan Rubin'
 import os
 
 def run(scriptdir, newpath, tempdir):
-    outfile = open(scriptdir + '/runbam_to_5primebed.sh', 'w')
+    outfile = open(scriptdir + '/runbam_to_5primebed.sbatch', 'w')
     outfile.write("indir=" + newpath + "\n")
     outfile.write("odir=" + newpath + "\n")
     outfile.write("for pathandfilename in `ls $indir*.sorted.bam`; do\n")
@@ -16,8 +16,8 @@ def run(scriptdir, newpath, tempdir):
     outfile.write("otfile5=${entry}.BedGraph\n")
     outfile.write("bed=${entry}.bed\n")
     outfile.write("fiveprime=${entry}.fiveprime.bed\n")
-    outfile.write("qsub -v infile=$infilename,bedfile=$bed,fivebrimebedfile=$fiveprime,outdir=$odir,outfile1=$otfile1,outfile2=$otfile2,outfile3=$otfile3,outfile4=$otfile4,outfile5=$otfile5 -N ${entry}BEDgrAPH " + scriptdir + "/bam_to_5primebed.sh\n")
+    outfile.write("sbatch -v infile=$infilename,bedfile=$bed,fivebrimebedfile=$fiveprime,outdir=$odir,outfile1=$otfile1,outfile2=$otfile2,outfile3=$otfile3,outfile4=$otfile4,outfile5=$otfile5 -N ${entry}BEDgrAPH " + scriptdir + "/bam_to_5primebed.sbatch\n")
     outfile.write("done")
     outfile.close()
     
-    os.system("bash " + scriptdir + "/runbam_to_5primebed.sh > " + tempdir + "/Job_ID.txt")
+    os.system("bash " + scriptdir + "/runbam_to_5primebed.sbatch > " + tempdir + "/Job_ID.txt")
