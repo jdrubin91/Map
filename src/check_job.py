@@ -11,7 +11,7 @@ def run(job,tempdir):
         for line in F:
             #Append job names to list 'ID'
             if 'Submitted batch job' in line:
-                ID.append(line.strip('\n').split('\t')[-1])
+                ID.append(line.strip('\n').split(' ')[-1])
                 print ID
     boolean = True
     while boolean:
