@@ -42,9 +42,9 @@ def run(scriptdir, genomedir, bowtieindex, bowtieoptions, email, e_and_o):
     outfile.write("echo ${outdir}${outfile}.sam\n")
     # outfile.write("/opt/bowtie/bowtie2-2.0.2/bowtie2 -p32 " + bowtieoptions + " -un ${outdir}${outfile}.unmapped.fastq \\\n")
     outfile.write("/opt/bowtie/2.2.9/bowtie2 -p32 " + bowtieoptions + " \\\n")
-    outfile.write(bowtieindex + " \\\n")
+    outfile.write("-x " + bowtieindex + " \\\n")
     outfile.write("-U $fastq1pathandfile \\\n")
-    outfile.write("> ${outdir}${outfile}.sam \\\n")
+    outfile.write("-S ${outdir}${outfile}.sam \\\n")
     outfile.write("2> ${outdir}${outfile}.stderr\n")
     outfile.close()
 
