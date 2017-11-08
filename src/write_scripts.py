@@ -71,6 +71,7 @@ def run(scriptdir, genomedir, bowtieindex, bowtieoptions, email, e_and_o):
     outfile.write("#SBATCH --error " + e_and_o + "%x.err\n")
     outfile.write("#SBATCH --mail-type=ALL\n")
     outfile.write("#SBATCH --mail-user=" + email + "\n")
+    outfile.write("module load python/2.7.14/xopen/0.1.0\n")
     outfile.write("module load trim_galore/0.4.3\n")
     outfile.write("java -XX:ParallelGCThreads=1 -jar /opt/trimmomatic/0.32/trimmomatic-0.32.jar SE $infile $outdir ILLUMINACLIP:Trimmomatic-0.36/adapters/TruSeq3-SE.fa:2:30:10\n")
     outfile.close()
