@@ -12,7 +12,6 @@ def run(job,tempdir):
             #Append job names to list 'ID'
             if 'Submitted batch job' in line:
                 ID.append(line.strip('\n').split(' ')[-1])
-                print ID
     boolean = True
     while boolean:
         #Check all job IDs using qstat. If job is done, status.txt will be empty

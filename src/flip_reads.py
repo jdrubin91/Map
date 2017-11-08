@@ -12,7 +12,7 @@ def run(scriptdir, fullpath, tempdir):
     outfile.write("echo $entry\n")
     outfile.write("ofile=${entry}.flip.fastq\n")
     outfile.write("echo $ofile\n")
-    outfile.write("sbatch -v infile=$pathandfilename,outfile=$ofile,outdir=$od -N ${ofile}flip " + scriptdir + "/flipfastq.sbatch\n")
+    outfile.write("sbatch -J ${ofile}flip --export=infile=$pathandfilename,outfile=$ofile,outdir=$od " + scriptdir + "/flipfastq.sbatch\n")
     outfile.write("done")
     outfile.close()
     

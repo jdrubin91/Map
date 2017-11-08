@@ -19,7 +19,7 @@ def run(scriptdir, newpath, tempdir, genome, boolean=True):
     outfile.write("ofile=${entry}.bowtie2\n")
     outfile.write("echo $ofile\n")
     outfile.write("echo ${odir}${ofile}.sam\n")
-    outfile.write("sbatch -v fastq1pathandfile=$pathandfilename,outdir=$od,outfile=$ofile -N ${ofile}bowtiemap " + scriptdir + "/bowtieafastq.sbatch\n")
+    outfile.write("sbatch -J ${ofile}bowtiemap --export=fastq1pathandfile=$pathandfilename,outdir=$od,outfile=$ofile " + scriptdir + "/bowtieafastq.sbatch\n")
     outfile.write("done")
     outfile.close()
     

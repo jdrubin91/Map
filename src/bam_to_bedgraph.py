@@ -16,7 +16,7 @@ def run(scriptdir, newpath, tempdir):
     outfile.write("otfile5=${entry}.BedGraph\n")
     outfile.write("bed=${entry}.bed\n")
     outfile.write("fiveprime=${entry}.fiveprime.bed\n")
-    outfile.write("sbatch -v infile=$infilename,bedfile=$bed,fivebrimebedfile=$fiveprime,outdir=$odir,outfile1=$otfile1,outfile2=$otfile2,outfile3=$otfile3,outfile4=$otfile4,outfile5=$otfile5 -N ${entry}BEDgrAPH " + scriptdir + "/bam_to_5primebed.sbatch\n")
+    outfile.write("sbatch -J ${entry}BamtoBegraph --export=infile=$infilename,bedfile=$bed,fivebrimebedfile=$fiveprime,outdir=$odir,outfile1=$otfile1,outfile2=$otfile2,outfile3=$otfile3,outfile4=$otfile4,outfile5=$otfile5 " + scriptdir + "/bam_to_5primebed.sbatch\n")
     outfile.write("done")
     outfile.close()
     

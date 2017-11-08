@@ -14,7 +14,7 @@ def run(scriptdir, fullpath, tempdir):
         outfile.write("for pathandfilename in `ls $indir*.sra`; do\n")
         outfile.write("entry=`basename $pathandfilename .sra`\n")
         outfile.write("infilename=$pathandfilename\n")
-        outfile.write("sbatch -v infile=$infilename,outdir=$od -N sradump${entry} " + scriptdir + "/sradump.sbatch\n")
+        outfile.write("sbatch -J sradump${entry} --export=infile=$infilename,outdir=$od " + scriptdir + "/sradump.sbatch\n")
         outfile.write("done")
         outfile.close()
         

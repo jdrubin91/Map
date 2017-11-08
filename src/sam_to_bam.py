@@ -10,7 +10,7 @@ def run(scriptdir, newpath, tempdir):
     outfile.write("for pathandfilename in `ls $id*.sam`; do\n")
     outfile.write("entry=`basename $pathandfilename .sam`\n")
     outfile.write("echo $entry\n")
-    outfile.write("sbatch -v outdir=$od,indir=$id,basename=$entry -N ${entry}samtobai " + scriptdir + "/samtobai.sbatch\n")
+    outfile.write("sbatch -J ${entry}samtobai --export=outdir=$od,indir=$id,basename=$entry " + scriptdir + "/samtobai.sbatch\n")
     outfile.write("done")
     outfile.close()
     
