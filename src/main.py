@@ -91,18 +91,21 @@ def parent_dir(directory):
 #bowtie2-build genomefasta.fa basename
 #genomefasta.fa = fasta file of entire genome
 #basename = base filename given to bowtie index files
+#If you don't have these files, copy /projects/Down/Dowellseq/genomes/bowtiebwaindexs/ to your scratch directory and specify in 
+#index_directory, where you've copied this folder
+index_directory = '/scratch/Users/joru1876/bowtiebwaindexes/'
 if genome == 'hg19':
-    genomedir='/projects/dowellLab/groseq/forJoey/human.hg19.genome'
-    bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/hg19_Bowtie2_indexp32'
+    genomedir=index_directory + 'human.hg19.genome'
+    bowtieindex=index_directory + 'hg19_Bowtie2_indexp32'
 elif genome == 'dm3':
-    genomedir='/projects/dowellLab/groseq/forJoey/dro/dm3.fa.genome'
-    bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/dm3.fa.Bowtie2'
+    genomedir=index_directory + 'dm3.fa.genome'
+    bowtieindex=index_directory + 'dm3.fa.Bowtie2'
 elif genome == 'mm10':
-    genomedir='/projects/dowellLab/groseq/forJoey/mm10.genome'
-    bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/mm10_Bowtie2_index'
+    genomedir=index_directory + 'mm10.genome'
+    bowtieindex=index_directory + 'mm10_Bowtie2_index'
 elif genome == 'ERCC':
-    bowtieindex='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/ERCC92_Bowtie2_index'
-    genomedir='/projects/Down/Dowellseq/genomes/bowtiebwaindexs/ERCC.genome'
+    bowtieindex=index_directory + 'ERCC92_Bowtie2_index'
+    genomedir=index_directory + 'ERCC.genome'
 else:
     sys.exit("Genome not found, exiting...")
 
