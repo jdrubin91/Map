@@ -90,7 +90,7 @@ def run(scriptdir, genomedir, bowtieindex, bowtieoptions, email, e_and_o):
     outfile.write("module load samtools/1.3.1\n")
     outfile.write("mkdir -p $outdir\n")
     outfile.write("samtools view -S -b -o ${outdir}${basename}.bam ${indir}${basename}.sam 2>${outdir}${basename}.bam.err\n")
-    outfile.write("samtools sort -m500G -o ${outdir}${basename}.sorted ${outdir}${basename}.bam\n")
+    outfile.write("samtools sort -m500G -o ${outdir}${basename}.sorted.bam ${outdir}${basename}.bam\n")
     outfile.write("samtools flagstat ${outdir}${basename}.bam > ${outdir}${basename}.bam.flagstat 2>${outdir}${basename}.bam.flagstat.err\n")
     outfile.write("samtools index ${outdir}${basename}.sorted.bam\n")
     outfile.write("samtools flagstat ${outdir}${basename}.sorted.bam > ${outdir}${basename}.sorted.bam.flagstat 2>${outdir}${basename}.sorted.bam.flagstat.err\n")
