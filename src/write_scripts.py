@@ -13,6 +13,7 @@ def run(scriptdir, genomedir, bowtieindex, bowtieoptions, email, e_and_o):
     outfile.write("#SBATCH --mail-type=ALL\n")
     outfile.write("#SBATCH --mail-user=" + email + "\n")
     outfile.write("module load bedtools/2.25.0\n")
+    outfile.write("module load gcc/7.2.0\n")
     outfile.write("genome=" + genomedir + "\n")
     outfile.write("echo $infile\n")
     outfile.write("echo $genome\n")
