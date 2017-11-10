@@ -4,7 +4,8 @@ This package takes as input fastq or SRA files and runs through the Dowell Lab p
 
 This python package is meant to be run on the fiji cluster at the University of Colorado at Boulder.
 
-To access the fiji compute cluster:\n
+To access the fiji compute cluster:
+
 ssh identikey@fiji.colorado.edu
 
 There are several modules in this package which can be turned on/off by switching booleans within src/main.py - Before running, please check:
@@ -13,6 +14,8 @@ There are several modules in this package which can be turned on/off by switchin
 
   2. You are pointing to the correct genome files
 
-To run:\n
-cd Map/\n
+To run:
+
+cd Map/
+
 python src/ /full/path/to/SRAorFASTQ/
