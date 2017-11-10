@@ -1,16 +1,23 @@
 # Map
 
-This package requires the following modules:
-module load sra_2.3.2-5
-module load samtools_0.1.19
+This package takes as input fastq or SRA files and runs through the Dowell Lab pipeline to convert these files into sorted bams, bedgraphs (normalized to millions mapped) and tdf files (to visualize on a genome browser such as IGV).
 
-Additionally, this package requires that you have access to /projects on the compute cluster in CU Boulder
-If this is not the case, bowtie index path must be changed in Map/scripts/bowtieafastq.sh and genome path must be changed in Map/scripts/bam_to_5primebed.sh
+This python package is meant to be run on the fiji cluster at the University of Colorado at Boulder.
+
+To access the fiji compute cluster:
+
+ssh identikey@fiji.colorado.edu
+
+There are several modules in this package which can be turned on/off by switching booleans within src/main.py - Before running, please check:
+
+  1. You are running all desired modules (some of these will depend on which sequencing kit you've used/what type of  sequencing data you are looking at)
+
+  2. You are pointing to the correct genome files
 
 To run:
-1. Go into Map/
-2. python src/ /full/path/to/SRA/ ('/' at the end of path is necessary)
 
-This package will check whether jobs have been completed every 10 seconds.  This can be changed in Map/src/check_job.py.
+git clone https://github.com/jdrubin91/Map.git
 
-Parts of main.py can be commented out depending on which mapping steps you would like to run.  As it is written, part of the mapping procedure will flip your initial reads (which is necessary for some protocols).  This step is necessary right now as a 'flipped' directory has been hard coded into the script. You can fix this by going into the scripts after Map/src/flip_reads.py and altering the paths to not include the 'flipped' directory.
+cd Map/
+
+python src/ /full/path/to/SRAorFASTQ/
