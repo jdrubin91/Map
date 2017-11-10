@@ -242,6 +242,7 @@ def run():
         #Creates IGV scripts 
         print "Creating IGV files..."
         igv_create.run(scriptdir, newpath, genome)
+        check_job.run(job,tempdir)
         print "done"
     
     if millions_mapped:
