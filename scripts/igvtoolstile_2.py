@@ -4,9 +4,9 @@ import glob
 
 
 def tiledir2(genome, directory_of_BedGraphs):
-	wf = open(directory_of_BedGraphs+"igvtoolstile.sh", "w")
+	wf = open(directory_of_BedGraphs+"igvtoolstile.sbatch", "w")
         for bedGraphfile in glob.glob(os.path.join(directory_of_BedGraphs, '*mp.BedGraph')):
-                wf.write("/opt/igvtools/2.1.24/igvtools toTDF "+bedGraphfile+" "+bedGraphfile+".tdf /opt/igvtools/2.1.24/genomes/" + genome + ".genome &\n\n")
+                wf.write("/opt/igvtools/2.3.75/igvtools toTDF "+bedGraphfile+" "+bedGraphfile+".tdf /opt/igvtools/2.1.24/genomes/" + genome + ".genome &\n\n")
 	wf.close()
 
 
