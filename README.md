@@ -16,6 +16,8 @@ There are several modules in this package which can be turned on/off by switchin
 
 To run:
 
+git clone https://github.com/jdrubin91/Map.git
+
 cd Map/
 
 python src/ /full/path/to/SRAorFASTQ/
