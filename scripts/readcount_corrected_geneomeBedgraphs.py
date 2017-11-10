@@ -29,15 +29,15 @@ def main(directory_of_sortedbams):
         with open(bedgraph) as f:
             for line in f:
                 line = line.strip('\n').split('\t')
-            if len(line)<3:
-                try:
-                    ine = line[0].split(" ")
-                except:
-                    print line
-            chrom, start, stop, num_of_reads = line
-            frag = calmp(float(num_of_reads), total_reads)
-            newline = "\t".join([chrom, start, stop, str(frag)])+"\n"
-            wf.write(newline)
+                if len(line)<3:
+                    try:
+                        line = line[0].split(" ")
+                    except:
+                        print line
+                chrom, start, stop, num_of_reads = line
+                frag = calmp(float(num_of_reads), total_reads)
+                newline = "\t".join([chrom, start, stop, str(frag)])+"\n"
+                wf.write(newline)
         wf.close()
 
 
