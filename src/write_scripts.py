@@ -61,7 +61,7 @@ def run(scriptdir, genomedir, bowtieindex, bowtieoptions, email, e_and_o):
     outfile.write("module load python/2.7.14/cutadapt")
     outfile.write("module load python/2.7.14/xopen/0.1.0\n")
     outfile.write("module load trim_galore/0.4.3\n")
-    outfile.write("module loadpython/2.7.14\n")
+    outfile.write("module load python/2.7.14\n")
     outfile.write("trim_galore --path_to_cutadapt /opt/cutadapt/python-2.7.14/1.12/bin/cutadapt -o $outdir $infile\n")
     outfile.close()
 
