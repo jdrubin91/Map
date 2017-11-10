@@ -18,7 +18,7 @@ def main(directory_of_sortedbams):
                 bamfileroot = sorted_bam_file_and_path.split("/")[-1].split(".sorted")[0]
 		f = open(sorted_bam_file_and_path)
 		lines = f.readlines()
-                mapped_reads = int(lines[2].split(" ")[0])
+                mapped_reads = int(lines[4].split(" ")[0])
                 dic_mapped[bamfileroot] = mapped_reads
                 list_num.append(mapped_reads)
 		f.close()
