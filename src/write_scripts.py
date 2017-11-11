@@ -84,7 +84,7 @@ def run(scriptdir, genomedir, bowtieindex, bowtieoptions, email, e_and_o):
     outfile.write("#SBATCH --nodes=1\n")
     outfile.write("#SBATCH --ntasks=64\n")
     outfile.write("#SBATCH --mem=500gb\n")
-    outfile.write("#SBATCH --time=96:00:00")
+    outfile.write("#SBATCH --time=96:00:00\n")
     outfile.write("#SBATCH --output " + e_and_o + "%x.out\n")
     outfile.write("#SBATCH --error " + e_and_o + "%x.err\n")
     outfile.write("#SBATCH --mail-type=ALL\n")
