@@ -201,7 +201,7 @@ def run():
             print "Checking reads mapped to: " + SpikeInbowtieindexes[i].split('/')[-1]
             g = SpikeIngenomes[i]
             b = SpikeInbowtieindexes[i]
-            write_scripts.run(scriptdir,g,b,bowtieoptions,email)
+            write_scripts.run(scriptdir,g,b,bowtieoptions,email,e_and_o)
             fastq_to_sam.run(scriptdir, newpath, tempdir, g, boolean=False)
             check_job.run(job,tempdir)
         for file1 in [i for i in os.listdir(newpath + 'bowtie2/spikeins/') if '.stderr' in i]:
