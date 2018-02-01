@@ -110,10 +110,12 @@ else:
     sys.exit("Genome not found, exiting...")
 
 #Path to spike-in control genomes
-SpikeIngenomes=['/projects/Down/Dowellseq/genomes/LBS-1.genome','/projects/Down/Dowellseq/genomes/A-region.genome','/projects/Down/Dowellseq/genomes/LBS-3.genome','/projects/Down/Dowellseq/genomes/C-unit.genome','/projects/Down/Dowellseq/genomes/TRNAS23.genome']
+spikeingenomedir='/scratch/Shares/dowell/bowtie2_indices/JDR_SpikeIn/'
+SpikeIngenomes=[spikeingenomedir+'LBS-1.genome',spikeingenomedir+'A-region.genome',spikeingenomedir+'LBS-3.genome',spikeingenomedir+'C-unit.genome',spikeingenomedir+'TRNAS23.genome']
 
 #Path to spike-in control bowtie indexes
-SpikeInbowtieindexes=['/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-1','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/A-region','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/LBS-3','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/C-unit','/projects/Down/Dowellseq/genomes/bowtiebwaindexs/TRNAS23']
+spikeinindexdir = '/scratch/Shares/dowell/bowtie2_indices/JDR_SpikeIn/bowtiebwaindexs/'
+SpikeInbowtieindexes=[spikeinindexdir+'LBS-1',spikeinindexdir+'A-region',spikeinindexdir+'LBS-3',spikeinindexdir+'C-unit',spikeinindexdir+'TRNAS23']
 
 
 #Home directory
@@ -203,10 +205,14 @@ def run():
             fastq_to_sam.run(scriptdir, newpath, tempdir, g, boolean=False)
             check_job.run(job,tempdir)
         for file1 in [i for i in os.listdir(newpath + 'bowtie2/spikeins/') if '.stderr' in i]:
+            outfile = open(newpath + 'bowtie2/spikeins/spikeins.txt','w')
+            outfile.write(file1.split('.')[0] + file1.split('.')[2]+'\n')
             print file1.split('.')[0] + file1.split('.')[2]
             with open(newpath + 'bowtie2/spikeins/' + file1) as F:
                 for line in F:
+                    outfile.write(line)
                     print line
+            outfile.close()
         print "done"
 
 
