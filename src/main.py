@@ -35,9 +35,9 @@ fullpath = sys.argv[1]
 email="joru1876@colorado.edu"
 
 #Specify genome
-# genome = 'hg19'
+genome = 'hg19'
 # genome = 'dm3'
-genome = 'mm10'
+# genome = 'mm10'
 # genome = 'ERCC'
 
 #Specify bowtie options
@@ -65,7 +65,7 @@ quality=True
 flip = True
 
 #Check for Spike-In controls? Only True if you added spike-in controls from Jonathan Rubin to your GRO-Seq samples
-spike= False
+spike= True
 
 #Booleans for all steps in pipeline (lets you only run part of the pipeline. If using this feature make sure above booleans are set appropriately
 #and you specify the correct path to input files. (JDR 8/30/17)
