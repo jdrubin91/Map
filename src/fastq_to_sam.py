@@ -2,12 +2,10 @@ __author__ = 'Jonathan Rubin'
 
 import os
 
-def run(scriptdir, newpath, tempdir, genome, boolean=True):
-    outfile = open(scriptdir + '/runbowtiedir.sbatch', 'w')
-    outfile.write("od=" + newpath + "bowtie2/\n")
-    if not boolean:
-        outfile.write("od=" + newpath + "bowtie2/spikeins/\n")
-    outfile.write("indir=" + newpath + "\n")
+def run(scriptdir, indir, samdir, tempdir, genome, boolean=True):
+    outfile = open(scriptdir + 'runbowtiedir.sbatch', 'w')
+    outfile.write("od=" + samdir + "\n")
+    outfile.write("indir=" + indir + "\n")
     if boolean:
         outfile.write("mkdir -p $od\n")
     outfile.write("for pathandfilename in `ls $indir*.fastq`; do\n")
@@ -23,6 +21,4 @@ def run(scriptdir, newpath, tempdir, genome, boolean=True):
     outfile.write("done")
     outfile.close()
     
-    os.system("bash " + scriptdir + "/runbowtiedir.sbatch > " + tempdir + "/Job_ID.txt")
-    
-    return newpath + 'bowtie2/'
+    os.system("bash " + scriptdir + "runbowtiedir.sbatch > " + tempdir + "/Job_ID.txt")

@@ -22,8 +22,12 @@ def run(job,tempdir):
         for statusfile in [i for i in os.listdir(tempdir) if "_status.txt" in i]:
             with open(tempdir + "/" + statusfile) as F:
                 i = 0
-                for line in F:
-                    i += 1
+                lines = F.readlines()
+                if len(lines) > 0:
+                    if lines[2].strip('\n').split()[4] != 'C':
+                        i += 1
+                # for line in F:
+                #     i += 1
                 status.append(i)
             os.system("rm " + tempdir + "/" + statusfile)
         boolean = sum(status) > 0
@@ -34,7 +38,7 @@ def run(job,tempdir):
                 print "\r",
                 sys.stdout.write("\033[K")
                 #Prints x Job(s) Still Running...
-                for x in range (4):
+                for x in range(4):
                     b = str(sum([1 for i in status if i>0])) + " Job(s) Still Running" + "." * x
                     #"/r" moves cursor to beginning
                     print "\r",b,

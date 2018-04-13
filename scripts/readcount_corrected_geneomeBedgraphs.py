@@ -9,9 +9,8 @@ def calmp(num_of_reads, total_reads):
         return mp
 
 #Normalize bedgraphs to millions mapped reads
-def main(directory_of_sortedbams):
+def main(directory_of_sortedbams, outdir):
     dic_mapped = {}
-    outdir = directory_of_sortedbams + "/genomecoveragebed/fortdf/"
     for sorted_bam_file_and_path in glob.glob(os.path.join(directory_of_sortedbams, '*sorted.bam.flagstat')):
         bamfileroot = sorted_bam_file_and_path.split("/")[-1].split(".sorted")[0]
         f = open(sorted_bam_file_and_path)
@@ -43,5 +42,5 @@ def main(directory_of_sortedbams):
 
 
 if __name__=="__main__":
-    main(sys.argv[1])
+    main(sys.argv[1],sys.argv[2])
 

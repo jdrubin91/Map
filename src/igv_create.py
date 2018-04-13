@@ -2,6 +2,6 @@ __author__ = 'Jonathan Rubin'
 
 import os
 
-def run(scriptdir, newpath, genome):
-    os.system("python " + scriptdir + "/igvtoolstile_2.py " + genome + " " + newpath + "genomecoveragebed/fortdf/")
-    os.system("sbatch " + newpath + "genomecoveragebed/fortdf/igvtoolstile.sbatch > " + tempdir + "/Job_ID.txt")
+def run(scriptdir, indir, tempdir, genome, e_and_o, email):
+    os.system("python " + scriptdir + "igvtoolstile_2.py " + genome + " " + indir + " " + e_and_o + " " + email)
+    os.system("sbatch " + indir + "igvtoolstile.sbatch > " + tempdir + "/Job_ID.txt")

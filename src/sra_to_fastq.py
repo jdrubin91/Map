@@ -8,9 +8,12 @@ def run(scriptdir, fullpath, tempdir):
         if 'sra' in file1:
             boolean = True
     if boolean:
-        outfile = open(scriptdir + '/runsradump.sbatch', 'w')
-        outfile.write("indir=" + fullpath + "\n")
-        outfile.write("od=" + fullpath + "\n")
+        output = fullpath + 'fastq/'
+        if not os.path.isdir(output):
+            os.makedirs(output)
+        outfile = open(scriptdir + '/runsradump.sh', 'w')
+        outfile.write("indir=" + output + "\n")
+        outfile.write("od=" + output + "\n")
         outfile.write("for pathandfilename in `ls $indir*.sra`; do\n")
         outfile.write("entry=`basename $pathandfilename .sra`\n")
         outfile.write("infilename=$pathandfilename\n")
@@ -18,6 +21,6 @@ def run(scriptdir, fullpath, tempdir):
         outfile.write("done")
         outfile.close()
         
-        os.system("bash " + scriptdir + "/runsradump.sbatch > " + tempdir + "/Job_ID.txt")
+        os.system("bash " + scriptdir + "/runsradump.sh > " + tempdir + "/Job_ID.txt")
     
     return boolean
