@@ -300,7 +300,7 @@ def run():
             indir = samdir
         else:
             indir = fullpath
-        bamdir = output + 'sortedbam/'
+        bamdir = output + 'BAM/'
         sam_to_bam.run(scriptdir, indir, bamdir, tempdir)
         check_job.run(job,tempdir)
         print "done"
@@ -337,7 +337,7 @@ def run():
             indir = bamdir
         else:
             indir = fullpath
-        outdir = output + 'fortdf/'
+        outdir = output + 'TDF/'
         readcount_correction.run(scriptdir, indir, outdir)
         print "done"
     
@@ -345,7 +345,7 @@ def run():
         #Creates IGV scripts 
         print "Creating IGV files..."
         if bamtobedgraph:
-            indir = output + 'fortdf/'
+            indir = output + 'TDF/'
         else:
             indir = output
         igv_create.run(scriptdir, indir, tempdir, genome, e_and_o, email)
