@@ -318,6 +318,7 @@ def run():
         os.makedirs(preseqdir)
         print "Running preseq..."
         preseq.run(scriptdir, indir, preseqdir, tempdir)
+        checkjob.run(job,tempdir)
         print "done\nRunning rseqc..."
         rseqc.run(scriptdir, indir, rseqcdir, genefile, rRNAfile, tempdir)
         check_job.run(job,tempdir)
