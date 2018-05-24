@@ -22,6 +22,7 @@ import flip_reads
 import fastq_to_sam
 import sam_to_bam
 import rseqc
+import preseq
 import bam_to_bedgraph
 import readcount_correction
 import igv_create
@@ -312,10 +313,16 @@ def run():
         else:
             indir = fullpath
         rseqcdir = output + 'QC/rseqc/'
+        preseqdir = output + 'QC/preseq/'
         os.makedirs(rseqcdir)
+        os.makedirs(preseqdir)
+        print "Running rseqc..."
         rseqc.run(scriptdir, indir, rseqcdir, genefile, rRNAfile, tempdir)
         check_job.run(job,tempdir)
         rseqc.compile_results(rseqcdir)
+        print "done\nRunning preseq..."
+        preseq.run(scriptdir, indir, preseqdir, tempdir)
+
         print "done"
     
     if bamtobedgraph:
