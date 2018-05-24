@@ -1,5 +1,7 @@
 __author__ = 'Jonathan Rubin'
 
+import os
+
 def run(scriptdir, indir, preseqdir, tempdir):
     outfile = open(scriptdir + 'run_preseq.sbatch', 'w')
     outfile.write("indir=" + indir + "\n")
