@@ -316,12 +316,12 @@ def run():
         preseqdir = output + 'QC/preseq/'
         os.makedirs(rseqcdir)
         os.makedirs(preseqdir)
-        print "Running rseqc..."
+        print "Running preseq..."
+        preseq.run(scriptdir, indir, preseqdir, tempdir)
+        print "done\nRunning rseqc..."
         rseqc.run(scriptdir, indir, rseqcdir, genefile, rRNAfile, tempdir)
         check_job.run(job,tempdir)
         rseqc.compile_results(rseqcdir)
-        print "done\nRunning preseq..."
-        preseq.run(scriptdir, indir, preseqdir, tempdir)
 
         print "done"
     
