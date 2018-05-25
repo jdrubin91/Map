@@ -173,9 +173,9 @@ def run(scriptdir, genomedir, bowtieindex, bowtieoptions, email, e_and_o, fullpa
     outfile.write("#SBATCH --mail-type=ALL\n")
     outfile.write("#SBATCH --mail-user=" + email + "\n")
     outfile.write("module load preseq/2.0.3\n")
-    outfile.write("/opt/preseq/2.0.3/preseq c_curve -B -o ${ofile}.txt ${infile}${filename}\n")
-    outfile.write("/opt/preseq/2.0.3/preseq lc_extrap -B -o ${ofile}.txt ${infile}${filename}\n")
-    outfile.write("/opt/preseq/2.0.3/preseq gc_extrap -B -o ${ofile}.txt ${infile}${filename}\n")
+    outfile.write("/opt/preseq/2.0.3/preseq c_curve -B -o ${ofile}.c_curve.txt ${infile}${filename}\n")
+    outfile.write("/opt/preseq/2.0.3/preseq lc_extrap -B -o ${ofile}.lc_extrap.txt ${infile}${filename}\n")
+    outfile.write("/opt/preseq/2.0.3/preseq gc_extrap -B -o ${ofile}.gc_extrap.txt ${infile}${filename}\n")
     outfile.close()
 
     outfile = open(scriptdir + 'sradump.sbatch','w')
