@@ -55,7 +55,7 @@ bowtieoptions = "--very-sensitive"
 # bowtieoptions = "-n 1 -m 1-best-strata"
 
 #Trim adaptors?
-trimgalore = False
+trimgalore = True
 trimmomaticbool = False
 #If no options desired use "" else needs a space at the end. This no longer works (JDR 8/22/17).
 trimgaloreoptions = ""
@@ -65,20 +65,20 @@ trimgaloreoptions = ""
 quality=True
 
 #Flip reads? This is used for some GRO-Seq protocols
-flip = False
+flip = True
 
 #Check for Spike-In controls? Only True if you added spike-in controls from Jonathan Rubin to your GRO-Seq samples
 spike= False
 
 #Booleans for all steps in pipeline (lets you only run part of the pipeline. If using this feature make sure above booleans are set appropriately
 #and you specify the correct path to input files. (JDR 8/30/17)
-sratofastq = False
-fastqtosam = False
-samtobam = False
-bamtobedgraph = False
-readcountcorrection = False
-igvcreate = False
-millionsmapped = False
+sratofastq = True
+fastqtosam = True
+samtobam = True
+bamtobedgraph = True
+readcountcorrection = True
+igvcreate = True
+millionsmapped = True
 
 #======================================================================
 
