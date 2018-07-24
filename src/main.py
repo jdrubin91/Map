@@ -346,6 +346,7 @@ def run():
         else:
             indir = fullpath
         outdir = output + 'TDF/'
+        os.makedirs(outdir)
         readcount_correction.run(scriptdir, indir, outdir)
         print "done"
     

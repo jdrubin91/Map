@@ -10,7 +10,7 @@ def main2(fullpath):
 	keyword = fullpath.split("/")[-1]
 	completeName = os.path.join(save_path, "millions_mapped.txt")
 	file2 = open(completeName, "w")
-	file2.truncate()
+	# file2.truncate()
 	for sorted_bam_file_and_path in glob.glob(os.path.join(directory_of_sortedbams, '*sorted.bam.flagstat')):
 			bamfileroot = sorted_bam_file_and_path.split("/")[-1]
 			n = 1
