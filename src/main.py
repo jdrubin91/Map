@@ -38,7 +38,8 @@ fullpath = sys.argv[1]
 email="joru1876@colorado.edu"
 
 #Specify genome
-genome = 'hg19'
+genome = 'hg38'
+# genome = 'hg19'
 # genome = 'dm3'
 # genome = 'mm10'
 # genome = 'ERCC'
@@ -97,6 +98,9 @@ def parent_dir(directory):
 #If you don't have these files, copy /projects/Down/Dowellseq/genomes/bowtiebwaindexs/ to your scratch directory and specify in 
 #index_directory, where you've copied this folder
 index_directory = '/scratch/Users/joru1876/bowtiebwaindexes/'
+if genome == 'hg38':
+    genomedir = '/scratch/Users/joru1876/bowtiebwaindexes/hg38.genome'
+    bowtieindex = '/scratch/Shares/public/genomes/Homo_sapiens/UCSC/hg38/Sequence/Bowtie2Index/genome'
 if genome == 'hg19':
     genomedir=index_directory + 'human.hg19.genome'
     bowtieindex=index_directory + 'hg19_Bowtie2_indexp32'

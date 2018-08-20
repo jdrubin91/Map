@@ -4,8 +4,8 @@ import glob
 import sys
 
 #Calculates millions mapped reads
-def calmp(num_of_reads, total_reads):
-        mp = int(num_of_reads)/(int(total_reads)/1000000)
+def calmp(num_of_reads, total_reads, start, stop):
+        mp = int(num_of_reads)/((int(total_reads)/1000000)*((int(stop)-int(start))/1000))
         return mp
 
 #Normalize bedgraphs to millions mapped reads
@@ -34,7 +34,7 @@ def main(directory_of_sortedbams, outdir):
                     except:
                         print line
                 chrom, start, stop, num_of_reads = line
-                frag = calmp(float(num_of_reads), total_reads)
+                frag = calmp(float(num_of_reads), total_reads, start, stop)
                 newline = "\t".join([chrom, start, stop, str(frag)])+"\n"
                 wf.write(newline)
         wf.close()
