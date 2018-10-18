@@ -9,22 +9,22 @@ __author__ = 'Jonathan Rubin'
 #Also need to git clone TrimGalore if using trim module into Map/ directory:
 #git clone https://github.com/FelixKrueger/TrimGalore.git
 
-import os, sys, datetime, config_parser
+import os, sys, datetime, argparse, configparser
 import trim_galore, trimmomatic, write_scripts, sra_to_fastq, check_job, quality_check
 import flip_reads, fastq_to_sam, sam_to_bam, rseqc, preseq, bam_to_bedgraph, readcount_correction
 import igv_create, millions_mapped
 
-def run():
-    parser = argparse.ArgumentParser(description='Mapping pipeline for GRO/PRO-Seq and RNA-Seq',usage='Map --config CONFIG.ini')
-    parser.add_argument('--config','-c',metavar='',help='REQUIRED. User input variables. A configuration file containing .ini suffix (ex. config.ini). See example in the examples folder.')
-    if len(sys.argv)==1:
-        # display help message when no args are passed.
-        parser.print_help()
-        sys.exit(1)
+# def run():
+    # parser = argparse.ArgumentParser(description='Mapping pipeline for GRO/PRO-Seq and RNA-Seq',usage='Map --config CONFIG.ini')
+    # parser.add_argument('--config','-c',metavar='',help='REQUIRED. User input variables. A configuration file containing .ini suffix (ex. config.ini). See example in the examples folder.')
+    # if len(sys.argv)==1:
+    #     # display help message when no args are passed.
+    #     parser.print_help()
+    #     sys.exit(1)
 
-    configfile = parser.parse_args().config
-    config = configparser.ConfigParser(interpolation = configparser.ExtendedInterpolation())
-    config.read(configfile)
+    # configfile = parser.parse_args().config
+    # config = configparser.ConfigParser(interpolation = configparser.ExtendedInterpolation())
+    # config.read(configfile)
 
 #User-defined input
 #======================================================================
@@ -98,7 +98,7 @@ index_directory = '/scratch/Users/joru1876/bowtiebwaindexes/'
 if genome == 'hg38':
     genomedir = '/scratch/Users/joru1876/bowtiebwaindexes/hg38.genome'
     bowtieindex = '/scratch/Shares/public/genomes/Homo_sapiens/UCSC/hg38/Sequence/Bowtie2Index/genome'
-if genome == 'hg19':
+elif genome == 'hg19':
     genomedir=index_directory + 'human.hg19.genome'
     bowtieindex=index_directory + 'hg19_Bowtie2_indexp32'
 elif genome == 'dm3':
