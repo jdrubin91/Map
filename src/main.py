@@ -9,25 +9,22 @@ __author__ = 'Jonathan Rubin'
 #Also need to git clone TrimGalore if using trim module into Map/ directory:
 #git clone https://github.com/FelixKrueger/TrimGalore.git
 
-import sys
-import os
-import datetime
-import trim_galore
-import trimmomatic
-import write_scripts
-import sra_to_fastq
-import check_job
-import quality_check
-import flip_reads
-import fastq_to_sam
-import sam_to_bam
-import rseqc
-import preseq
-import bam_to_bedgraph
-import readcount_correction
-import igv_create
-import millions_mapped
+import os, sys, datetime, config_parser
+import trim_galore, trimmomatic, write_scripts, sra_to_fastq, check_job, quality_check
+import flip_reads, fastq_to_sam, sam_to_bam, rseqc, preseq, bam_to_bedgraph, readcount_correction
+import igv_create, millions_mapped
 
+def run():
+    parser = argparse.ArgumentParser(description='Mapping pipeline for GRO/PRO-Seq and RNA-Seq',usage='Map --config CONFIG.ini')
+    parser.add_argument('--config','-c',metavar='',help='REQUIRED. User input variables. A configuration file containing .ini suffix (ex. config.ini). See example in the examples folder.')
+    if len(sys.argv)==1:
+        # display help message when no args are passed.
+        parser.print_help()
+        sys.exit(1)
+
+    configfile = parser.parse_args().config
+    config = configparser.ConfigParser(interpolation = configparser.ExtendedInterpolation())
+    config.read(configfile)
 
 #User-defined input
 #======================================================================
