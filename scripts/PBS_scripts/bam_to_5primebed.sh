@@ -22,10 +22,10 @@ echo $genome
 echo $outfile1
 mkdir -p  $outdir/genomecoveragebed
 mkdir -p $outdir/forFstitch
-mkdir -p $outdir/genomecoveragebed/fortdf
+mkdir -p $outdir/genomecoveragebed/TDF
 /opt/bedtools/2.22.0/genomeCoverageBed -5 -bg -strand + -ibam $infile -g $genome > $outdir/forFstitch/$outfile1
 /opt/bedtools/2.22.0/genomeCoverageBed -5 -bg -strand - -ibam $infile -g $genome > $outdir/forFstitch/$outfile2
 /opt/bedtools/2.22.0/genomeCoverageBed -bg -strand + -ibam $infile -g $genome > $outdir/genomecoveragebed/$outfile3
 /opt/bedtools/2.22.0/genomeCoverageBed -bg -strand - -ibam $infile -g $genome | awk -F '	' -v OFS='	' '{ $4 = - $4 ; print $0 }'> $outdir/genomecoveragebed/$outfile4
-cat $outdir/genomecoveragebed/$outfile4 $outdir/genomecoveragebed/$outfile3 > $outdir/genomecoveragebed/fortdf/$outfile5.bed
-/opt/bedtools/2.22.0/sortBed -i $outdir/genomecoveragebed/fortdf/$outfile5.bed >$outdir/genomecoveragebed/fortdf/$outfile5
+cat $outdir/genomecoveragebed/$outfile4 $outdir/genomecoveragebed/$outfile3 > $outdir/genomecoveragebed/TDF/$outfile5.bed
+/opt/bedtools/2.22.0/sortBed -i $outdir/genomecoveragebed/TDF/$outfile5.bed >$outdir/genomecoveragebed/TDF/$outfile5
