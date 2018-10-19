@@ -12,7 +12,7 @@ def calmp(num_of_reads, total_reads):
 def main(directory_of_sortedbams):
         dic_mapped = {}
         list_num = []
-	outdir = directory_of_sortedbams + "/genomecoveragebed/fortdf/"
+	outdir = directory_of_sortedbams + "/genomecoveragebed/TDF/"
 	print "outdir is", outdir
         for sorted_bam_file_and_path in glob.glob(os.path.join(directory_of_sortedbams, '*sorted.bam.flagstat')):
                 bamfileroot = sorted_bam_file_and_path.split("/")[-1].split(".sorted")[0]
